@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+</head>
+<body>
+    <h1>CADASTRO</h1>
+    <form action="{% url 'auth:register' %}" method="POST"> {% csrf_token %}
+        <ul>
+            <li>
+                <label for="">Usuário: </label>
+                <input type="text" name="username">
+            </li>
+            <br>
+            <li>
+                <label for="">Email: </label>
+                <input type="email" name="email">
+            </li>
+            <br>
+            <li>
+                <label for="">Senha: </label>
+                <input type="password" name="password">
+            </li>
+            <br>
+            <li>
+                <label for="">Confirmar senha: </label>
+                <input type="password" name="confirm_password">
+            </li>
+            <br>
+            <input type="submit" value="Cadastrar">
+        </ul>
+    </form>
+</body>
+</html>

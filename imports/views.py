@@ -2,5 +2,5 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 
-def home(request):
-    return HttpResponse('Home')
+def produtos(request):
+    return HttpResponse('Listar produtos')
