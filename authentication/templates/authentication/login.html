@@ -1,7 +1,7 @@
 {% extends 'global/base.html' %}
 
 {% block content %}
-<form action="" method="POST">
+<form action="{% url 'auth:login' %}" method="POST">
     {% csrf_token %}
     <div class="d-flex justify-content-center mt-5">
       <div class="card" style="width: 24rem; padding: 2rem;">
