@@ -1,33 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-</head>
-<body>
-    <h1>LOGIN</h1>
-    <form action="{% url 'auth:login' %}" method="POST"> {% csrf_token %}
-        {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-        <ul>
-            <li>
-                <label for="">Usuario: </label>
-                <input type="text" name="username">
-            </li>
-            <li>
-                <label for="">Senha: </label>
-                <input type="password" name="password">
-            </li>
-            <br>
-            <input type="submit" value="Entrar">
-        </ul>
-    </form>
-</body>
-</html>
+{% extends 'global/base.html' %}
+
+{% block content %}
+<form action="" method="POST">
+    {% csrf_token %}
+    <div class="d-flex justify-content-center mt-5">
+      <div class="card" style="width: 24rem; padding: 2rem;">
+        
+        <h1 class="card-title text-center">Login</h1>
+        
+        {% include 'global/partials/messages.html' %}
+
+        <div class="form-outline mb-3">
+          <label class="form-label" for="form2Example1">Usuário</label>
+          <input type="text" id="form2Example1" class="form-control" name="username"/>
+        </div>
+        <div class="form-outline mb-3">
+          <label class="form-label" for="form2Example1">Senha</label>
+          <input type="password" id="form2Example1" class="form-control" name="password"/>
+        </div>
+        <br>
+  
+        <div class="col-12 d-grid gap-2 col-6 mx-auto">
+          <button class="btn btn-primary" type="submit">Entrar</button>
+        </div>
+      </div>
+  
+    </div>
+  </form>
+{% endblock content %}
