@@ -1,4 +1,4 @@
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.contrib.auth.models import User
 from django.core.validators import validate_email
 from django.shortcuts import redirect, render
@@ -8,6 +8,8 @@ from .utils import password_is_valid
 
 def register(request):
     if request.method == 'GET':
+        if request.user.is_authenticated:
+            return redirect('/')
         return render(request, 'authentication/register.html')
     elif request.method == 'POST':
         username = request.POST.get('username')
@@ -16,21 +18,25 @@ def register(request):
         confirm_password = request.POST.get('confirm_password')
 
         if User.objects.filter(username=username).exists():
-            print('usuario já existe.')
+            messages.add_message(request, messages.ERROR,
+                                 'Usuário já existe.')
             return render(request, 'authentication/register.html')
 
-        if not password_is_valid(request, password=password, confirm_password=confirm_password):
-            print('Senha invalida.')
+        if len(username) < 6:
+            messages.add_message(request, messages.ERROR,
+                                 'Usuário precisa ter mais de 6 caracteres.')
+            return render(request, 'authentication/register.html')
+
+        if not password_is_valid(
+                request, password=password,
+                confirm_password=confirm_password):
             return render(request, 'authentication/register.html')
 
         try:
             validate_email(email)
         except:
-            print('email inválido.')
-            return render(request, 'authentication/register.html')
-
-        if len(username) < 6:
-            print('usuario menor que 6 caracteres.')
+            messages.add_message(request, messages.ERROR,
+                                 'Email inválido.')
             return render(request, 'authentication/register.html')
 
         try:
@@ -40,9 +46,11 @@ def register(request):
                 email=email
             )
             user.save()
-            print('Usuario salvo com sucesso.')
+            messages.add_message(request, messages.SUCCESS,
+                                 'Cadastro feito com sucesso.')
         except:
-            print('Erro interno do sistema.')
+            messages.add_message(request, messages.ERROR,
+                                 'Erro interno do sistema.')
             return render(request, 'authentication/register.html')
 
         return redirect('/auth/login')
@@ -50,7 +58,10 @@ def register(request):
 
 def login(request):
     if request.method == 'GET':
+        if request.user.is_authenticated:
+            return redirect('/')
         return render(request, 'authentication/login.html')
+
     elif request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -58,8 +69,16 @@ def login(request):
         user = auth.authenticate(username=username, password=password)
 
         if not user:
-            print('Usuario ou senha inválido.')
+            messages.add_message(request, messages.ERROR,
+                                 'Usuario ou senha inválido.')
             return render(request, 'authentication/login.html')
         else:
-            print('Bem vindo')
+            auth.login(request, user)
+            messages.add_message(request, messages.SUCCESS,
+                                 'Login com sucesso.')
             return redirect('/')
+
+
+def logout(request):
+    auth.logout(request)
+    return redirect('/auth/login')

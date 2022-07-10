@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 from typing import List
 
+from django.contrib import messages
 from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -128,3 +129,13 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Menssages
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'alert-danger',
+    messages.WARNING: 'alert-warning',
+    messages.DEBUG: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.INFO: 'alert-info',
+}

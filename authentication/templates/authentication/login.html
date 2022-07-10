@@ -9,6 +9,13 @@
 <body>
     <h1>LOGIN</h1>
     <form action="{% url 'auth:login' %}" method="POST"> {% csrf_token %}
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
         <ul>
             <li>
                 <label for="">Usuario: </label>
