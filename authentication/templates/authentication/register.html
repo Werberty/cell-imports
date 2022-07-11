@@ -1,5 +1,7 @@
 {% extends 'global/base.html' %}
 
+{% block title %}Cadastro |{% endblock title %}
+
 {% block content %}
 <form action="{% url 'auth:register' %}" method="POST">
     {% csrf_token %}

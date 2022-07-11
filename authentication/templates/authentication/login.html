@@ -1,5 +1,7 @@
 {% extends 'global/base.html' %}
 
+{% block title %}Login |{% endblock title %}
+
 {% block content %}
 <form action="{% url 'auth:login' %}" method="POST">
     {% csrf_token %}
