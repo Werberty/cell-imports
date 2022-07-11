@@ -1,35 +1,49 @@
 {% extends 'global/base.html' %}
 
+{% block title %}Produtos |{% endblock title %}
+
 {% block content %}
-    <h1>Produtos</h1>
-    <div>
-        <h2>Adicione produtos:</h2>
-        <form action="#" method="POST"> {% csrf_token %}
-            <ul>
-                <li>
-                    <label for="">Nome: </label>
-                    <input type="text" name='name'>
-                </li>
-                <li>
-                    <label for="">Memoria: </label>
-                    <input type="text" name='name'>
-                </li>
-                <li>
-                    <label for="">Armazenamento: </label>
-                    <input type="text" name='name'>
-                </li>
-                <li>
-                    <label for="">Cor: </label>
-                    <input type="text" name='name'>
-                </li>
-            </ul>
+<div class="container">
+    <h1 class="mt-4">Produtos</h1>
+        <h3>Adicione produtos:</h3>
+        <form class="row gx-3 gy-2 align-items-center" action="#" method="POST">
+            {% csrf_token %}
+            <div class="col-sm-3">
+              <label class="form-label" for="specificSizeInputName">Modelo</label>
+              <input type="text" class="form-control" id="specificSizeInputName">
+            </div>
+            <div class="col-sm-2">
+              <label class="form-label" for="specificSizeInputGroupUsername">Cor</label>
+              <input type="text" class="form-control" id="specificSizeInputGroupUsername">
+            </div>
+            <div class="col-sm-2">
+              <label class="form-label" for="specificSizeSelect">Memória</label>
+              <select class="form-select" id="specificSizeSelect">
+                <option selected>------</option>
+                <option value="1">2Gb RAM</option>
+                <option value="2">4Gb RAM</option>
+                <option value="3">8Gb RAM</option>
+              </select>
+            </div>
+            <div class="col-sm-2">
+                <label class="form-label" for="specificSizeSelect">Armazenamento</label>
+                <select class="form-select" id="specificSizeSelect">
+                    <option selected>------</option>
+                    <option value="1">32Gb ROM</option>
+                    <option value="2">64Gb ROM</option>
+                    <option value="3">128Gb ROM</option>
+                </select>
+            </div>
+            <div class="col-auto">
+              <button type="submit" class="btn btn-primary">Adicionar</button>
+            </div>
         </form>
-    </div>
-    <br><br>
-    <div>
-        <h2>Listando produtos:</h2>
-        <ul>
-            <li></li>
-        </ul>
+        <br><br>
+        <div>
+            <h2>Listando produtos:</h2>
+            <ul>
+                <li></li>
+            </ul>
+        </div>
     </div>
 {% endblock content %}

@@ -2,8 +2,67 @@
 
 {% block title %}Cadastro |{% endblock title %}
 
-{% block content %}
-<form action="{% url 'auth:register' %}" method="POST">
+{% block body %}
+<div class="bg-dark">
+  <div id="layoutAuthentication">
+      <div id="layoutAuthentication_content">
+          <main>
+              <div class="container">
+                  <div class="row justify-content-center">
+                      <div class="col-lg-7">
+                          <div class="card shadow-lg border-0 rounded-lg mt-5">
+                              <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Account</h3></div>
+                              <div class="card-body">
+                                  <form action="{% url 'auth:register' %}" method="POST">
+                                    {% csrf_token %}
+                                    {% include 'global/partials/messages.html' %}
+                                      <div class="row mb-3">
+                                          <div class="col-md-12">
+                                              <div class="form-floating mb-3 mb-md-0">
+                                                  <input class="form-control" id="inputFirstName" type="text" placeholder="Ex: Zequinha" name="username" />
+                                                  <label for="inputFirstName">Usuário</label>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="form-floating mb-3">
+                                          <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" name="email" />
+                                          <label for="inputEmail">Email</label>
+                                      </div>
+                                      <div class="row mb-3">
+                                          <div class="col-md-6">
+                                              <div class="form-floating mb-3 mb-md-0">
+                                                  <input class="form-control" id="inputPassword" type="password" placeholder="Crie uma senha" name="password" />
+                                                  <label for="inputPassword">Senha</label>
+                                              </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                              <div class="form-floating mb-3 mb-md-0">
+                                                  <input class="form-control" id="inputPasswordConfirm" type="password" placeholder="Confirme a senha" name="confirm_password" />
+                                                  <label for="inputPasswordConfirm">Confirmar senha</label>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="mt-4 mb-0">
+                                          <div class="d-grid"><input class="btn btn-primary btn-block" type="submit" value="Cadastrar"></div>
+                                      </div>
+                                  </form>
+                              </div>
+                              <div class="card-footer text-center py-3">
+                                  <div class="small"><a href="{% url 'auth:login' %}">Tem uma conta? Vá para login</a></div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </main>
+      </div>
+      <div id="layoutAuthentication_footer">
+          {% include 'global/partials/footer.html' %}
+      </div>
+  </div>
+</div>
+
+{% comment %} <form action="{% url 'auth:register' %}" method="POST">
     {% csrf_token %}
     <div class="d-flex justify-content-center mt-5">
       <div class="card" style="width: 24rem; padding: 2rem;">
@@ -36,5 +95,5 @@
       </div>
   
     </div>
-  </form>
-{% endblock content %}
+  </form> {% endcomment %}
+{% endblock body %}
