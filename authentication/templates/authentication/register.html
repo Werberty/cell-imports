@@ -61,39 +61,4 @@
       </div>
   </div>
 </div>
-
-{% comment %} <form action="{% url 'auth:register' %}" method="POST">
-    {% csrf_token %}
-    <div class="d-flex justify-content-center mt-5">
-      <div class="card" style="width: 24rem; padding: 2rem;">
-        
-        <h1 class="card-title text-center">Cadastro</h1>
-        
-        {% include 'global/partials/messages.html' %}
-
-        <div class="form-outline mb-3">
-          <label class="form-label" for="form2Example1">Usuário</label>
-          <input type="text" id="form2Example1" class="form-control" name="username"/>
-        </div>
-        <div class="form-outline mb-3">
-            <label class="form-label" for="form2Example1">Email</label>
-            <input type="email" id="form2Example1" class="form-control" name="email"/>
-        </div>
-        <div class="form-outline mb-3">
-          <label class="form-label" for="form2Example1">Senha</label>
-          <input type="password" id="form2Example1" class="form-control" name="password"/>
-        </div>
-        <div class="form-outline mb-3">
-            <label class="form-label" for="form2Example1">Confirmar senha</label>
-            <input type="password" id="form2Example1" class="form-control" name="confirm_password"/>
-        </div>
-        <br>
-  
-        <div class="col-12 d-grid gap-2 col-6 mx-auto">
-          <button class="btn btn-primary" type="submit">Cadastrar</button>
-        </div>
-      </div>
-  
-    </div>
-  </form> {% endcomment %}
 {% endblock body %}

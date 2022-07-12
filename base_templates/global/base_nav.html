@@ -1,8 +1,8 @@
-{% extends 'base.html' %}
+{% extends 'global/base.html' %}
 {% load static %}
 
-{% block 'body' %}
-<div class="bg-primary">
+{% block body %}
+    {% if user.is_authenticated %}
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
         <a class="navbar-brand ps-3" href="index.html">
@@ -23,7 +23,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#!">Logout</a></li>
+                    <li><a class="dropdown-item" href="{% url 'auth:logout' %}">Sair</a></li>
                 </ul>
             </li>
         </ul>
@@ -35,7 +35,7 @@
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Loja</div>
                         <a class="nav-link" href="{% url 'imports:products' %}">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-box"></i></div>
                             Produtos
                         </a>
                     </div>
@@ -59,5 +59,6 @@
     <script src="{% static 'js/scripts.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-</div>
-{% endblock 'body' %}
+    {% endif %}
+{% endblock %}
+
