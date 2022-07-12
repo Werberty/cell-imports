@@ -8,17 +8,18 @@
         <h3>Adicione produtos:</h3>
         <form class="row gx-3 gy-2 align-items-center" action="#" method="POST">
             {% csrf_token %}
+            {% include 'global/partials/messages.html' %}
             <div class="col-sm-3">
               <label class="form-label" for="specificSizeInputName">Modelo</label>
-              <input type="text" class="form-control" id="specificSizeInputName">
+              <input type="text" class="form-control" id="specificSizeInputName" name="modelo">
             </div>
             <div class="col-sm-2">
               <label class="form-label" for="specificSizeInputGroupUsername">Cor</label>
-              <input type="text" class="form-control" id="specificSizeInputGroupUsername">
+              <input type="text" class="form-control" id="specificSizeInputGroupUsername" name="cor">
             </div>
             <div class="col-sm-2">
               <label class="form-label" for="specificSizeSelect">Memória</label>
-              <select class="form-select" id="specificSizeSelect">
+              <select class="form-select" id="specificSizeSelect" name="memoria">
                 <option selected>------</option>
                 <option value="1">2Gb RAM</option>
                 <option value="2">4Gb RAM</option>
@@ -27,7 +28,7 @@
             </div>
             <div class="col-sm-2">
                 <label class="form-label" for="specificSizeSelect">Armazenamento</label>
-                <select class="form-select" id="specificSizeSelect">
+                <select class="form-select" id="specificSizeSelect" name="armazenamento">
                     <option selected>------</option>
                     <option value="1">32Gb ROM</option>
                     <option value="2">64Gb ROM</option>
@@ -41,9 +42,22 @@
         <br><br>
         <div>
             <h2>Listando produtos:</h2>
-            <ul>
-                <li></li>
-            </ul>
+            <table class="table table-striped">
+              <tr>
+                <td>Modelo</td>
+                <td>Cor</td>
+                <td>Memória</td>
+                <td>Armazenamento</td>
+              </tr>
+              {% for produto in produtos %}
+              <tr>
+                <td>{{ produto.modelo }}</td>
+                <td>{{ produto.cor }}</td>
+                <td>{{ produto.memoria }}</td>
+                <td>{{ produto.armazenamento }}</td>
+              </tr>
+              {% endfor %}
+            </table>
         </div>
     </div>
 {% endblock content %}
