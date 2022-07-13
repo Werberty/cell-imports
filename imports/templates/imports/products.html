@@ -35,6 +35,7 @@
                 <td>Cor</td>
                 <td>Memória</td>
                 <td>Armazenamento</td>
+                <td>Ações</td>
               </tr>
               {% for produto in produtos %}
               <tr>
@@ -42,6 +43,7 @@
                 <td>{{ produto.cor }}</td>
                 <td>{{ produto.memoria }}Gb RAM</td>
                 <td>{{ produto.armazenamento }}Gb ROM</td>
+                <td><a href="{% url 'imports:delete_product' produto.id %}" class="link-danger"><i class="fa-solid fa-trash-can"></i></a></td>
               </tr>
               {% endfor %}
             </table>
