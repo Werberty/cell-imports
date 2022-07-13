@@ -5,7 +5,7 @@
 {% block content %}
 <div class="container">
     <h1 class="mt-4">Produtos</h1>
-        <h3>Adicione produtos:</h3>
+        <h3>Adicione o celular:</h3>
         <form class="row gx-3 gy-2 align-items-center" action="#" method="POST">
             {% csrf_token %}
             {% include 'global/partials/messages.html' %}
@@ -21,18 +21,22 @@
               <label class="form-label" for="specificSizeSelect">Memória</label>
               <select class="form-select" id="specificSizeSelect" name="memoria">
                 <option selected>------</option>
-                <option value="1">2Gb RAM</option>
-                <option value="2">4Gb RAM</option>
-                <option value="3">8Gb RAM</option>
+                <option value="2">2Gb RAM</option>
+                <option value="4">4Gb RAM</option>
+                <option value="6">6Gb RAM</option>
+                <option value="8">8Gb RAM</option>
+                <option value="12">12Gb RAM</option>
               </select>
             </div>
             <div class="col-sm-2">
                 <label class="form-label" for="specificSizeSelect">Armazenamento</label>
                 <select class="form-select" id="specificSizeSelect" name="armazenamento">
                     <option selected>------</option>
-                    <option value="1">32Gb ROM</option>
-                    <option value="2">64Gb ROM</option>
-                    <option value="3">128Gb ROM</option>
+                    <option value="32">32Gb ROM</option>
+                    <option value="64">64Gb ROM</option>
+                    <option value="128">128Gb ROM</option>
+                    <option value="256">256Gb ROM</option>
+                    <option value="512">512Gb ROM</option>
                 </select>
             </div>
             <div class="col-auto">
@@ -41,7 +45,7 @@
         </form>
         <br><br>
         <div>
-            <h2>Listando produtos:</h2>
+            <h3>Lista de celulares:</h3>
             <table class="table table-striped">
               <tr>
                 <td>Modelo</td>
@@ -53,8 +57,8 @@
               <tr>
                 <td>{{ produto.modelo }}</td>
                 <td>{{ produto.cor }}</td>
-                <td>{{ produto.memoria }}</td>
-                <td>{{ produto.armazenamento }}</td>
+                <td>{{ produto.memoria }}Gb RAM</td>
+                <td>{{ produto.armazenamento }}Gb ROM</td>
               </tr>
               {% endfor %}
             </table>

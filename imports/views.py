@@ -7,7 +7,7 @@ from .models import Produto
 
 def products(request):
     if request.method == 'GET':
-        produtos = Produto.objects.all()
+        produtos = Produto.objects.all().order_by('-id')
         return render(request, 'imports/products.html', context={
             'produtos': produtos,
         })
@@ -25,6 +25,9 @@ def products(request):
             armazenamento=armazenamento
         )
         produto.save()
+        produtos = Produto.objects.all().order_by('-id')
 
         messages.add_message(request, constants.SUCCESS, 'Produto cadastrado')
-        return render(request, 'imports/products.html')
+        return render(request, 'imports/products.html', context={
+            'produtos': produtos,
+        })
