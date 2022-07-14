@@ -11,6 +11,9 @@
             {% csrf_token %}
             {% include 'global/partials/messages.html' %}
             <div class="col-sm-3">
+              {{ form.marca|as_crispy_field }}
+            </div>
+            <div class="col-sm-3">
               {{ form.modelo|as_crispy_field }}
             </div>
             <div class="col-sm-2">
@@ -27,48 +30,7 @@
             </div>
         </form>
         <br><br>
-        <div>
-            <h3>Lista de celulares:</h3>
-            <table class="table table-striped">
-              <tr>
-                <td>Modelo</td>
-                <td>Cor</td>
-                <td>Memória</td>
-                <td>Armazenamento</td>
-                <td>Ações</td>
-              </tr>
-              {% for produto in produtos %}
-              <tr>
-                <td>{{ produto.modelo }}</td>
-                <td>{{ produto.cor }}</td>
-                <td>{{ produto.memoria }}Gb RAM</td>
-                <td>{{ produto.armazenamento }}Gb ROM</td>
-                <td><a href="#" class="link-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-trash-can"></i></a></td>
-                <!-- Modal -->
-                <form action="{% url 'imports:delete_product' produto.id %}" method="POST">
-                  {% csrf_token %}
-                  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="staticBackdropLabel">Confirmação</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                          <p class="text-center">Tem certeza que deseja deletar esse registro?<p> 
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                          <button type="submit" class="btn btn-danger">Deletar</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </tr>
-              {% endfor %}
-            </table>
-        </div>
+        {% include 'imports/list_products.html' %}
     </div>
     
 {% endblock content %}

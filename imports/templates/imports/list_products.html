@@ -1,0 +1,32 @@
+<div>
+    <h3>Lista de celulares:</h3>
+    <table class="table table-striped">
+      <tr>
+        <td>Marca</td>
+        <td>Modelo</td>
+        <td>Cor</td>
+        <td>Memória</td>
+        <td>Armazenamento</td>
+        <td>Ações</td>
+      </tr>
+      {% for produto in produtos %}
+      <tr>
+        <td>{{ produto.marca }}</td>
+        <td>{{ produto.modelo }}</td>
+        <td>{{ produto.cor }}</td>
+        <td>{{ produto.memoria }}Gb RAM</td>
+        <td>{{ produto.armazenamento }}Gb ROM</td>
+        <td>
+          <a href="#" class="link-danger me-3" data-bs-toggle="modal" data-bs-target="#modalDelete"><i class="fa-solid fa-trash-can"></i></a>
+          <a href="#" class="link-primary me-3" data-bs-toggle="modal" data-bs-target="#modalEdit"><i class="fa-solid fa-solid fa-pen"></i></a>
+        </td>
+        <!-- Modal Delete -->
+        {% include 'imports/delete_product.html' %}
+
+        <!-- Modal Edit -->
+        {% include 'imports/edit_product.html' %}
+
+      </tr>
+      {% endfor %}
+    </table>
+</div>

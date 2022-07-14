@@ -7,6 +7,7 @@ class ProdutoForm(ModelForm):
     class Meta:
         model = Produto
         fields = [
+            'marca',
             'modelo',
             'cor',
             'memoria',
