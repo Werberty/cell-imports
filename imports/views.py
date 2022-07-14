@@ -11,7 +11,8 @@ from .models import Produto
 
 def products(request):
     if request.method == 'GET':
-        produtos = Produto.objects.all().order_by('-id')
+        produtos = Produto.objects.filter(
+            vendedor=request.user).order_by('-id')
         form = ProdutoForm()
         return render(request, 'imports/products.html', context={
             'produtos': produtos,
@@ -22,13 +23,16 @@ def products(request):
         form = ProdutoForm(request.POST)
 
         if form.is_valid():
-            form.save()
+            form_prod = form.save(commit=False)
+            form_prod.vendedor = request.user
+            form_prod.save()
             messages.add_message(
                 request, constants.SUCCESS, 'Produto cadastrado')
         else:
             messages.add_message(request, constants.ERROR, 'Erro ao cadastrar')
 
-        produtos = Produto.objects.all().order_by('-id')
+        produtos = Produto.objects.filter(
+            vendedor=request.user).order_by('-id')
         form = ProdutoForm()
 
         return render(request, 'imports/products.html', context={

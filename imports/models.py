@@ -1,5 +1,5 @@
+from django.contrib.auth.models import User
 from django.db import models
-from pyexpat import model
 
 
 class Produto(models.Model):
@@ -19,6 +19,9 @@ class Produto(models.Model):
         (512, '512Gb RAM'),
     )
 
+    vendedor = models.ForeignKey(
+        User, on_delete=models.CASCADE, default='')
+    marca = models.CharField(max_length=45)
     modelo = models.CharField(max_length=65)
     cor = models.CharField(max_length=35)
     memoria = models.IntegerField(choices=MEMORIA_CHOICES)
