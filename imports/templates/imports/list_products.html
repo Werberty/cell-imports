@@ -1,32 +1,78 @@
 <div>
     <h3>Lista de celulares:</h3>
-    <table class="table table-striped">
-      <tr>
-        <td>Marca</td>
-        <td>Modelo</td>
-        <td>Cor</td>
-        <td>Memória</td>
-        <td>Armazenamento</td>
-        <td>Ações</td>
-      </tr>
-      {% for produto in produtos %}
-      <tr>
-        <td>{{ produto.marca }}</td>
-        <td>{{ produto.modelo }}</td>
-        <td>{{ produto.cor }}</td>
-        <td>{{ produto.memoria }}Gb RAM</td>
-        <td>{{ produto.armazenamento }}Gb ROM</td>
-        <td>
-          <a href="#" class="link-danger me-3" data-bs-toggle="modal" data-bs-target="#modalDelete"><i class="fa-solid fa-trash-can"></i></a>
-          <a href="{% url 'imports:edit_product' produto.id %}" class="link-primary me-3"><i class="fa-solid fa-solid fa-pen"></i></a>
-        </td>
+    <table class="table table-striped" id="table-products" class="display" style="width:100%">
+      <thead>
+        <tr class="table-dark">
+          <td scope="col" >Marca</td>
+          <td scope="col" >Modelo</td>
+          <td scope="col" >Cor</td>
+          <td scope="col" >Memória</td>
+          <td scope="col" >Armazenamento</td>
+          <td scope="col" >Ações</td>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for produto in produtos %}
+        <tr>
+          <td>{{ produto.marca }}</td>
+          <td>{{ produto.modelo }}</td>
+          <td>{{ produto.cor }}</td>
+          <td>{{ produto.memoria }}Gb RAM</td>
+          <td>{{ produto.armazenamento }}Gb ROM</td>
+          <td>
+            <abbr title="Editar" class="me-3"><a href="{% url 'imports:edit_product' produto.id %}" class="link-primary"><i class="fa-solid fa-solid fa-pen"></i></a></abbr>
+            <abbr title="Deletar" class="me-3"><a href="#" class="link-danger" data-bs-toggle="modal" data-bs-target="#modalDelete"><i class="fa-solid fa-trash-can"></i></a></abbr>
+          </td>
+        
         <!-- Modal Delete -->
         {% include 'imports/delete_product.html' %}
-
-        <!-- Modal Edit -->
-        {% comment %} {% include 'imports/edit_product.html' %} {% endcomment %}
-
-      </tr>
-      {% endfor %}
+        
+        </tr>
+        {% endfor %}
+    </tbody>
     </table>
 </div>
+
+<!-- Js Datatables-->
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.12.1/datatables.min.js"></script>
+
+
+<script>
+  $(document).ready( function () {
+
+    $('#table-productss').DataTable({
+        responsive: true,
+        // "bSort": false,
+        "aaSorting": [],
+        "pageLength": 10,
+        "language": {
+            "decimal": "",
+            "emptyTable": "Sem dados disponíveis",
+            "info": "Mostrando de _START_ até _END_ de _TOTAL_ registos",
+            "infoEmpty": "Mostrando de 0 até 0 de 0 registos",
+            "infoFiltered": "(filtrado de _MAX_ registos no total)",
+            "infoPostFix": "",
+            "thousands": ",",
+            "lengthMenu": "Mostrar _MENU_ registos",
+            "loadingRecords": "A carregar dados...",
+            "processing": "A processar...",
+            "search": "Procurar:",
+            "zeroRecords": "Não foram encontrados resultados",
+            "paginate": {
+                "first": "Primeiro",
+                "last": "Último",
+                "next": "Seguinte",
+                "previous": "Anterior"
+            },
+            "aria": {
+                "sortAscending": ": ordem crescente",
+                "sortDescending": ": ordem decrescente"
+            }
+        }
+    });
+
+  } );
+</script>
+
+
