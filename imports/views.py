@@ -54,4 +54,27 @@ def delete_product(request, product_id):
 
 
 def edit_product(request, product_id):
-    return redirect('/products')
+    produto = get_object_or_404(Produto, id=product_id)
+    produtos = Produto.objects.filter(
+        vendedor=request.user).order_by('-id')
+    form = ProdutoForm(instance=produto)
+    if request.method == 'GET':
+        return render(request, 'imports/edit_product.html', context={
+            'form': form,
+            'produto': produto,
+            'produtos': produtos,
+        })
+    elif request.method == "POST":
+        form = ProdutoForm(request.POST, instance=produto)
+
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, constants.SUCCESS, 'Produto editado')
+            return redirect('/products')
+        else:
+            messages.add_message(request, constants.ERROR, 'Erro ao editar')
+            return render(request, 'imports/edit_product.html', context={
+                'form': form,
+                'produto': produto,
+                'produtos': produtos,
+            })

@@ -1,20 +1,37 @@
-<form action="#" method="POST">
-    {% csrf_token %}
-    <div class="modal fade" id="modalEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalEditLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">Editar produto</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body mt-2">
-            ...
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-success">Salvar</button>
-          </div>
-        </div>
-      </div>
+{% extends 'global/base_nav.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Produtos |{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mt-4">Produtos</h1>
+        <h3>Adicione o celular:</h3>
+        <form class="row gx-3 gy-2 align-items-center" action="{% url 'imports:edit_product' produto.id %}" method="POST">
+            {% csrf_token %}
+            {% include 'global/partials/messages.html' %}
+            <div class="col-sm-3">
+              {{ form.marca|as_crispy_field }}
+            </div>
+            <div class="col-sm-3">
+              {{ form.modelo|as_crispy_field }}
+            </div>
+            <div class="col-sm-2">
+              {{ form.cor|as_crispy_field }}
+            </div>
+            <div class="col-sm-2">
+              {{ form.memoria|as_crispy_field }}
+            </div>
+            <div class="col-sm-2">
+              {{ form.armazenamento|as_crispy_field }}
+            </div>
+            <div class="col-12 mt-3">
+              <a href="{% url 'imports:products' %}" class="btn btn-danger" >Cancelar</a>
+              <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+        </form>
+        <br><br>
+        {% include 'imports/list_products.html' %}
     </div>
-  </form>
+    
+{% endblock content %}
