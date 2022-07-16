@@ -17,6 +17,8 @@ class Migration(migrations.Migration):
             model_name='produto',
             name='vendedor',
             field=models.ForeignKey(
-                default='', on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+                default='',
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL),
         ),
     ]
