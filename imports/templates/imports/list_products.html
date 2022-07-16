@@ -1,5 +1,5 @@
 <div>
-    <h3>Lista de celulares:</h3>
+    <h4>Lista de smartphone:</h4>
     <table class="table table-striped" id="table-products" class="display" style="width:100%">
       <thead>
         <tr class="table-dark">
@@ -41,9 +41,10 @@
 <script>
   $(document).ready( function () {
 
-    $('#table-productss').DataTable({
+    $('#table-products').DataTable({
         responsive: true,
         // "bSort": false,
+        "lengthMenu": [ 5, 10, 20, 50 ],
         "aaSorting": [],
         "pageLength": 10,
         "language": {

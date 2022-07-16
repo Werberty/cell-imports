@@ -9,6 +9,10 @@ from .forms import ProdutoForm
 from .models import Produto
 
 
+def home(request):
+    return render(request, 'imports/home.html')
+
+
 def products(request):
     if request.method == 'GET':
         produtos = Produto.objects.filter(
