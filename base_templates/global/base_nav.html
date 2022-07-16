@@ -5,7 +5,7 @@
     {% if user.is_authenticated %}
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="{% url 'imports:home' %}">
+        <a class="navbar-brand ps-3" href="{% url 'products:home' %}">
             <i class="fa-solid fa-mobile-screen-button"></i>
             Cell Imports
         </a>
@@ -35,7 +35,7 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Loja</div>
-                        <a class="nav-link" href="{% url 'imports:products' %}">
+                        <a class="nav-link" href="{% url 'products:products' %}">
                             <div class="sb-nav-link-icon"><i class="fas fa-box"></i></div>
                             Produtos
                         </a>

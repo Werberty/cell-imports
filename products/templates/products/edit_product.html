@@ -6,8 +6,8 @@
 {% block content %}
 <div class="container">
     <h1 class="mt-4">Produtos</h1>
-        <h4>Adicione o smartphone:</h4>
-        <form class="row gx-3 gy-2 align-items-center" action="{% url 'imports:products' %}" method="POST">
+        <h4>Edite o smartphone:</h4>
+        <form class="row gx-3 gy-2 align-items-center" action="{% url 'products:edit_product' produto.id %}" method="POST">
             {% csrf_token %}
             {% include 'global/partials/messages.html' %}
             <div class="col-sm-3">
@@ -26,11 +26,12 @@
               {{ form.armazenamento|as_crispy_field }}
             </div>
             <div class="col-12 mt-3">
-              <button type="submit" class="btn btn-primary">Adicionar</button>
+              <a href="{% url 'products:products' %}" class="btn btn-danger" >Cancelar</a>
+              <button type="submit" class="btn btn-primary">Salvar</button>
             </div>
         </form>
         <br><br>
-        {% include 'imports/list_products.html' %}
+        {% include 'products/list_products.html' %}
     </div>
     
 {% endblock content %}
