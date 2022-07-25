@@ -18,7 +18,9 @@ Um sistema administrativo para uma loja de smartphones.
 
 
 ## :camera: Layout web
+![Web 1](https://github.com/Werberty/cell-imports/blob/9cf3026b4481ff5a4d7631c3820a78b2a8b968d7/assets/cell-imports1.gif)
 ![Web 1](https://github.com/Werberty/cell-imports/blob/406fb2b1ee853d59683496133cfa27af0397dc6b/assets/cell-imports.png)
+
 
 ## :computer: Tecnologias utilizadas
 - Python
