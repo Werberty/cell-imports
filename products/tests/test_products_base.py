@@ -4,8 +4,6 @@ from products.models import User
 
 class ProductsTestBase(TestCase):
     def setUp(self) -> None:
-        self.make_vendedor()
-        self.login_vendedor()
         return super().setUp()
 
     def make_vendedor(self,
