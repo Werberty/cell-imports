@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.messages import constants
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 
 from .forms import ProdutoForm
 from .models import Produto
@@ -50,12 +51,12 @@ def delete_product(request, product_id):
     product = Produto.objects.filter(id=product_id)
 
     if request.method == 'GET':
-        return redirect('/products')
+        return redirect(reverse('products:products'))
 
     if request.method == 'POST':
         product.delete()
         messages.add_message(request, constants.WARNING, 'Produto deletado')
-        return redirect('/products')
+        return redirect(reverse('products:products'))
 
 
 @login_required(login_url='/auth/login')
@@ -76,7 +77,7 @@ def edit_product(request, product_id):
         if form.is_valid():
             form.save()
             messages.add_message(request, constants.SUCCESS, 'Produto editado')
-            return redirect('/products')
+            return redirect(reverse('products:products'))
         else:
             messages.add_message(request, constants.ERROR, 'Erro ao editar')
             return render(request, 'products/edit_product.html', context={
