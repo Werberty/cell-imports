@@ -4,33 +4,44 @@
 {% block title %}Produtos |{% endblock title %}
 
 {% block content %}
-<div class="container">
-    <h1 class="mt-4">Produtos</h1>
-        <h4>Adicione o smartphone:</h4>
-        <form class="row gx-3 gy-2 align-items-center" action="{% url 'products:products' %}" method="POST">
-            {% csrf_token %}
-            {% include 'global/partials/messages.html' %}
-            <div class="col-sm-3">
-              {{ form.marca|as_crispy_field }}
-            </div>
-            <div class="col-sm-3">
-              {{ form.modelo|as_crispy_field }}
-            </div>
-            <div class="col-sm-2">
-              {{ form.cor|as_crispy_field }}
-            </div>
-            <div class="col-sm-2">
-              {{ form.memoria|as_crispy_field }}
-            </div>
-            <div class="col-sm-2">
-              {{ form.armazenamento|as_crispy_field }}
-            </div>
-            <div class="col-12 mt-3">
-              <button type="submit" class="btn btn-primary">Adicionar</button>
-            </div>
-        </form>
-        <br><br>
+
+      <h1 class="mt-4">Produtos</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Gerencie seus produtos</li>
+        </ol>
+
+        
+        <div class="card mb-4">
+          <div class="card-header">
+            <i class="fas fa-box me-1"></i>
+            Adicione produtos
+          </div>
+          <div class="card-body">
+            <form class="row gx-3 gy-2 align-items-center" action="{% url 'products:products' %}" method="POST">
+              {% csrf_token %}
+              {% include 'global/partials/messages.html' %}
+              <div class="col-sm-3">
+                {{ form.marca|as_crispy_field }}
+              </div>
+              <div class="col-sm-3">
+                {{ form.modelo|as_crispy_field }}
+              </div>
+              <div class="col-sm-2">
+                {{ form.cor|as_crispy_field }}
+              </div>
+              <div class="col-sm-2">
+                {{ form.memoria|as_crispy_field }}
+              </div>
+              <div class="col-sm-2">
+                {{ form.armazenamento|as_crispy_field }}
+              </div>
+              <div class="col-12 mt-3">
+                <button type="submit" class="btn btn-primary">Adicionar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        
         {% include 'products/list_products.html' %}
-    </div>
-    
+
 {% endblock content %}

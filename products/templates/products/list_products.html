@@ -1,5 +1,10 @@
-<div>
-    <h4>Lista de smartphone:</h4>
+
+<div class="card mb-4">
+  <div class="card-header">
+      <i class="fas fa-table me-1"></i>
+      Lista de produtos
+  </div>
+  <div class="card-body">
     <table class="table table-striped" id="table-products" class="display" style="width:100%">
       <thead>
         <tr class="table-dark">
@@ -32,11 +37,11 @@
         {% endfor %}
     </tbody>
     </table>
+  </div>
 </div>
-
+    
 <!-- Js Datatables-->
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.12.1/datatables.min.js"></script>
-
 
 <script>
   $(document).ready( function () {
