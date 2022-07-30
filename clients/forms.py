@@ -7,4 +7,9 @@ from .models import Clientes
 class ClientesForm(ModelForm):
     class Meta:
         model = Clientes
-        fields = '__all__'
+        fields = [
+            'nome',
+            'sobrenome',
+            'telefone',
+            'email',
+        ]

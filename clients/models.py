@@ -8,3 +8,6 @@ class Clientes(models.Model):
     sobrenome = models.CharField(max_length=256)
     telefone = models.CharField(max_length=18)
     email = models.CharField(max_length=65)
+
+    def __str__(self) -> str:
+        return f'{self.nome} {self.sobrenome}'
