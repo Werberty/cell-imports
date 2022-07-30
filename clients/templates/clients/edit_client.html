@@ -12,10 +12,10 @@
     <div class="card mb-4">
         <div class="card-header">
           <i class="fas fa-user-plus me-1"></i>
-          Cadastre clientes
+          Edite o cliente
         </div>
         <div class="card-body">
-            <form class="row gx-3 gy-2 align-items-center" action="{% url 'clients:clients' %}" method="POST">
+            <form class="row gx-3 gy-2 align-items-center" action="{% url 'clients:edit_client' cliente.id %}" method="POST">
                 {% csrf_token %}
                 {% include 'global/partials/messages.html' %}
                 <div class="col-sm-3">
@@ -31,9 +31,12 @@
                     {{ form.email|as_crispy_field }}
                 </div>
                 <div class="col-12 mt-3">
-                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                    <button type="submit" class="btn btn-primary">Editar</button>
                 </div>
             </form>
         </div>
     </div>
+
+    {% include 'clients/list_clients.html' %}
+    
 {% endblock content %}

@@ -1,0 +1,42 @@
+{% extends 'global/base_nav.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Clientes |{% endblock title %}
+
+{% block content %}
+    <h1 class="mt-4">Clientes</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">Gerencie seus clientes</li>
+    </ol>
+
+    <div class="card mb-4">
+        <div class="card-header">
+          <i class="fas fa-user-plus me-1"></i>
+          Cadastre clientes
+        </div>
+        <div class="card-body">
+            <form class="row gx-3 gy-2 align-items-center" action="{% url 'clients:clients' %}" method="POST">
+                {% csrf_token %}
+                {% include 'global/partials/messages.html' %}
+                <div class="col-sm-3">
+                    {{ form.nome|as_crispy_field }}
+                </div>
+                <div class="col-sm-3">
+                    {{ form.sobrenome|as_crispy_field }}
+                </div>
+                <div class="col-sm-3">
+                    {{ form.telefone|as_crispy_field }}
+                </div>
+                <div class="col-sm-3">
+                    {{ form.email|as_crispy_field }}
+                </div>
+                <div class="col-12 mt-3">
+                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {% include 'clients/list_clients.html' %}
+    
+{% endblock content %}

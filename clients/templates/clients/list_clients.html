@@ -1,0 +1,76 @@
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Lista de clientes
+    </div>
+    <div class="card-body">
+      <table class="table table-striped" id="table-clients" class="display" style="width:100%">
+        <thead>
+          <tr class="table-dark">
+            <td scope="col" >Nome completo</td>
+            <td scope="col" >Telefone</td>
+            <td scope="col" >email</td>
+            <td scope="col" >Ações</td>
+          </tr>
+        </thead>
+  
+        <tbody>
+          {% for cliente in clientes %}
+          <tr>
+            <td>{{ cliente.nome }} {{ cliente.sobrenome }}</td>
+            <td>{{ cliente.telefone }}</td>
+            <td>{{ cliente.email }}</td>
+            <td>
+              <abbr title="Editar" class="me-3"><a href="{% url 'clients:edit_client' cliente.id %}" class="link-primary"><i class="fa-solid fa-solid fa-pen"></i></a></abbr>
+              <abbr title="Deletar" class="me-3"><a href="#" class="link-danger" data-bs-toggle="modal" data-bs-target="#modalDelete"><i class="fa-solid fa-trash-can"></i></a></abbr>
+            </td>
+          
+          <!-- Modal Delete -->
+          
+          </tr>
+          {% endfor %}
+      </tbody>
+      </table>
+    </div>
+  </div>
+
+<!-- Js Datatables-->
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.12.1/datatables.min.js"></script>
+
+<script>
+  $(document).ready( function () {
+
+    $('#table-clients').DataTable({
+        responsive: true,
+        // "bSort": false,
+        "lengthMenu": [ 5, 10, 20, 50 ],
+        "aaSorting": [],
+        "pageLength": 5,
+        "language": {
+            "decimal": "",
+            "emptyTable": "Sem dados disponíveis",
+            "info": "Mostrando de _START_ até _END_ de _TOTAL_ registos",
+            "infoEmpty": "Mostrando de 0 até 0 de 0 registos",
+            "infoFiltered": "(filtrado de _MAX_ registos no total)",
+            "infoPostFix": "",
+            "thousands": ",",
+            "lengthMenu": "Mostrar _MENU_ registos",
+            "loadingRecords": "A carregar dados...",
+            "processing": "A processar...",
+            "search": "Procurar:",
+            "zeroRecords": "Não foram encontrados resultados",
+            "paginate": {
+                "first": "Primeiro",
+                "last": "Último",
+                "next": "Seguinte",
+                "previous": "Anterior"
+            },
+            "aria": {
+                "sortAscending": ": ordem crescente",
+                "sortDescending": ": ordem decrescente"
+            }
+        }
+    });
+
+  } );
+</script>
