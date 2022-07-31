@@ -1,8 +1,10 @@
 from ast import Return
+from operator import contains
 
 from django.contrib import messages
 from django.contrib.messages import constants
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 
 from .forms import ClientesForm
 from .models import Clientes
@@ -10,7 +12,8 @@ from .models import Clientes
 
 def clients(request):
     if request.method == 'GET':
-        clientes = Clientes.objects.filter(vendedor=request.user)
+        clientes = Clientes.objects.filter(
+            vendedor=request.user).order_by('-id')
         form = ClientesForm()
         return render(request, 'clients/clients.html', context={
             'form': form,
@@ -27,9 +30,12 @@ def clients(request):
         else:
             messages.add_message(request, constants.ERROR, 'Erro ao cadastrar')
 
+        clientes = Clientes.objects.filter(
+            vendedor=request.user).order_by('-id')
         form = ClientesForm()
         return render(request, 'clients/clients.html', context={
-            'form': form
+            'form': form,
+            'clientes': clientes,
         })
 
 
@@ -60,3 +66,13 @@ def edit_client(request, id_client):
             'clientes': clientes,
             'form': form,
         })
+
+
+def delete_client(request, id_client):
+    cliente = Clientes.objects.filter(id=id_client)
+    if request.method == 'GET':
+        return redirect(reverse('clients:clients'))
+    if request.method == 'POST':
+        cliente.delete()
+        messages.add_message(request, constants.WARNING, 'Cliente deletado')
+        return redirect(reverse('clients:clients'))
