@@ -76,3 +76,11 @@ def delete_client(request, id_client):
         cliente.delete()
         messages.add_message(request, constants.WARNING, 'Cliente deletado')
         return redirect(reverse('clients:clients'))
+
+
+def detail_client(request, id_client):
+    cliente = get_object_or_404(Clientes, id=id_client)
+
+    return render(request, 'clients/detail_client.html', context={
+        'cliente': cliente,
+    })

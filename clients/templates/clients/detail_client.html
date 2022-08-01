@@ -1,0 +1,23 @@
+{% extends 'global/base_nav.html' %}
+
+{% block title %} {{ cliente.nome }} |{% endblock title %}
+
+{% block content %}
+    <h1 class="mt-4">{{ cliente.nome }} {{ cliente.sobrenome }}</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="{% url 'clients:clients' %}">Clientes</a></li>
+        <li class="breadcrumb-item active">Detalhes</li>
+    </ol>
+    <div class="card mb-4">
+        <div class="card-body">
+            <p>
+                <ul>
+                    <li>Telefone: {{ cliente.telefone }}</li>
+                    <li>Email: {{ cliente.email }}</li>
+                </ul>
+            </p>
+        </div>
+    </div>
+    <div style="height: 100vh"></div>
+    <div class="card mb-4"><div class="card-body">When scrolling, the navigation stays at the top of the page. This is the end of the static navigation demo.</div></div>
+{% endblock content %}

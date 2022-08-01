@@ -21,8 +21,10 @@
             <td>{{ cliente.telefone }}</td>
             <td>{{ cliente.email }}</td>
             <td>
+              <abbr title="Ver detalhes" class="me-3"><a href="{% url 'clients:detail_client' cliente.id %}" class="link-success"><i class="fa-solid fa-eye"></i></a></abbr>
               <abbr title="Editar" class="me-3"><a href="{% url 'clients:edit_client' cliente.id %}" class="link-primary"><i class="fa-solid fa-solid fa-pen"></i></a></abbr>
               <abbr title="Deletar" class="me-3"><a href="#" class="link-danger" data-bs-toggle="modal" data-bs-target="#modalDelete"><i class="fa-solid fa-trash-can"></i></a></abbr>
+
             </td>
           
           <!-- Modal Delete -->

@@ -10,4 +10,6 @@ urlpatterns = [
          views.edit_client, name='edit_client'),
     path('clients/delete/<int:id_client>',
          views.delete_client, name='delete_client'),
+    path('clients/detail/<int:id_client>',
+         views.detail_client, name='detail_client'),
 ]

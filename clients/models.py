@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.forms import model_to_dict
 
 
 class Clientes(models.Model):
@@ -7,7 +8,7 @@ class Clientes(models.Model):
     nome = models.CharField(max_length=65)
     sobrenome = models.CharField(max_length=256)
     telefone = models.CharField(max_length=18)
-    email = models.CharField(max_length=65)
+    email = models.EmailField(max_length=256)
 
     def __str__(self) -> str:
         return f'{self.nome} {self.sobrenome}'
