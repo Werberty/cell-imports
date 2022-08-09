@@ -6,4 +6,5 @@ urlpatterns = [
     path('stock/', include('products.urls')),
     path('', include('clients.urls')),
     path('auth/', include('authentication.urls')),
+    path('sales/', include('sales.urls')),
 ]

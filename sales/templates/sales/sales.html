@@ -1,0 +1,36 @@
+{% extends 'global/base_nav.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Sales {% endblock title %}
+
+{% block content %}
+
+    <h1 class="mt-4">Vendas</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">Cadastre suas vendas</li>
+    </ol>
+
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fa fa-cart-plus me-1"></i>
+            Vendas
+        </div>
+        <div class="card-body">
+            <form class="row gx-3 gy-2 align-items-center" action="{% url 'sales:sales' %}" method="POST">
+                {% csrf_token %}
+                {% include 'global/partials/messages.html' %}
+                <div class="col-sm-6">
+                    {{ form.cliente|as_crispy_field }}
+                </div>
+                <div class="col-sm-6">
+                    {{ form.produto|as_crispy_field }}
+                </div>
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <button type="submit" class="btn btn-primary">Adicionar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock content %}
