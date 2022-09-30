@@ -12,4 +12,6 @@ class ProdutoForm(ModelForm):
             'cor',
             'memoria',
             'armazenamento',
+            'codigo_produto',
+            'valor_compra',
         ]

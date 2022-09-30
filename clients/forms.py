@@ -1,12 +1,12 @@
 from django.forms import ModelForm
 from pyexpat import model
 
-from .models import Clientes
+from .models import Cliente
 
 
 class ClientesForm(ModelForm):
     class Meta:
-        model = Clientes
+        model = Cliente
         fields = [
             'nome',
             'sobrenome',

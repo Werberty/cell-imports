@@ -1,7 +1,7 @@
 {% extends 'global/base_nav.html' %}
 {% load crispy_forms_tags %}
 
-{% block title %}Sales {% endblock title %}
+{% block title %}Sales |{% endblock title %}
 
 {% block content %}
 
@@ -20,12 +20,35 @@
             <form class="row gx-3 gy-2 align-items-center" action="{% url 'sales:sales' %}" method="POST">
                 {% csrf_token %}
                 {% include 'global/partials/messages.html' %}
-                <div class="col-sm-6">
+
+                <div class="col-sm-3">
                     {{ form.cliente|as_crispy_field }}
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-3">
                     {{ form.produto|as_crispy_field }}
                 </div>
+                <div class="col-sm-3">
+                    {{ form.valor_venda|as_crispy_field }}
+                </div>
+
+                {% comment %} <div class="col-sm-6">
+                    <label for="exampleDataList" class="form-label">Cliente</label>
+                    <input name="cliente" class="form-control" list="datalistClients" id="exampleDataList" placeholder="Procure um cliente...">
+                    <datalist id="datalistClients">
+                        {% for cliente in clientes %}
+                            <option value="{{ cliente.nome }} {{ cliente.sobrenome }}">
+                        {% endfor %}
+                    </datalist>
+                </div>
+                <div class="col-sm-6">
+                    <label for="exampleDataList" class="form-label">Produto</label>
+                    <input name="produto" class="form-control" list="datalistProducts" id="exampleDataList" placeholder="Procure um produto...">
+                    <datalist id="datalistProducts">
+                        {% for produto in produtos %}
+                            <option value="{{ produto.marca }} {{ produto.modelo }}">
+                        {% endfor %}
+                    </datalist>
+                </div> {% endcomment %}
                 <div class="d-grid gap-2 col-6 mx-auto">
                     <button type="submit" class="btn btn-primary">Adicionar</button>
                 </div>

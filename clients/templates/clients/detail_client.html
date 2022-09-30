@@ -9,11 +9,30 @@
         <li class="breadcrumb-item active">Detalhes</li>
     </ol>
     <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-user me-1"></i>
+            Dados
+        </div>
         <div class="card-body">
             <p>
                 <ul>
                     <li>Telefone: {{ cliente.telefone }}</li>
                     <li>Email: {{ cliente.email }}</li>
+                </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-user me-1"></i>
+            Compras
+        </div>
+        <div class="card-body">
+            <p>
+                <ul>
+                    {% for compra in cliente.venda_set.all %}
+                        <li><a href="{% url 'products:detail_product' compra.id %}">{{ compra }}</a></li>
+                    {% endfor %}
                 </ul>
             </p>
         </div>

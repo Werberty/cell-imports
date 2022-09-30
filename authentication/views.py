@@ -76,7 +76,7 @@ def login(request):
             auth.login(request, user)
             messages.add_message(request, messages.SUCCESS,
                                  'Login com sucesso.')
-            return redirect('/')
+            return redirect('/stock/')
 
 
 def logout(request):

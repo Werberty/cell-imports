@@ -35,6 +35,12 @@
                 <div class="col-sm-2">
                   {{ form.armazenamento|as_crispy_field }}
                 </div>
+                <div class="col-sm-2">
+                  {{ form.codigo_produto|as_crispy_field }}
+                </div>
+                <div class="col-sm-2">
+                  {{ form.valor_compra|as_crispy_field }}
+                </div>
                 <div class="col-12 mt-3">
                   <a href="{% url 'products:products' %}" class="btn btn-danger" >Cancelar</a>
                   <button type="submit" class="btn btn-primary">Salvar</button>

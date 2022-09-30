@@ -1,0 +1,34 @@
+{% extends 'global/base_nav.html' %}
+
+{% block title %} {{ produto.marca }} |{% endblock title %}
+
+{% block content %}
+    <h1 class="mt-4">{{ produto.marca }} {{ produto.modelo }}</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="{% url 'products:products' %}">Produtos</a></li>
+        <li class="breadcrumb-item active">Detalhes</li>
+    </ol>
+    <div class="card mb-4">
+        <div class="card-header">
+          <i class="fas fa-box me-1"></i>
+          Detalhes
+        </div>
+        <div class="card-body">
+            <p>
+                <ul>
+                    <li><strong>Cor:</strong> {{ produto.cor}}</li>
+                    <li><strong>Memória:</strong> {{ produto.memoria }}Gb RAM</li>
+                    <li><strong>Armazenamento:</strong> {{ produto.armazenamento }}Gb ROM</li>
+                    <li><strong>Valor da compra:</strong> R$ {{ produto.valor_compra }}</li>
+                    <li><strong>Status:</strong> {% if produto.status %}Vendido {% else %}Em estoque {% endif %}</li>
+                    <br>
+                    <li><strong>Cadastrado em:</strong> {{ produto.created_at }}</li>
+                    <br> 
+                    <li>Vendido para: {{ produto.cliente_set }}</li>
+                </ul>
+            </p>
+        </div>
+    </div>
+    <div style="height: 100vh"></div>
+    <div class="card mb-4"><div class="card-body">When scrolling, the navigation stays at the top of the page. This is the end of the static navigation demo.</div></div>
+{% endblock content %}

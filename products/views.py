@@ -16,8 +16,7 @@ def home(request):
 @login_required(login_url='/auth/login')
 def products(request):
     if request.method == 'GET':
-        produtos = Produto.objects.filter(
-            vendedor=request.user).order_by('-id')
+        produtos = Produto.objects.filter(vendido=False).order_by('-id')
         form = ProdutoForm()
         return render(request, 'products/products.html', context={
             'produtos': produtos,
@@ -36,8 +35,7 @@ def products(request):
         else:
             messages.add_message(request, constants.ERROR, 'Erro ao cadastrar')
 
-        produtos = Produto.objects.filter(
-            vendedor=request.user).order_by('-id')
+        produtos = Produto.objects.filter(vendido=False).order_by('-id')
         form = ProdutoForm()
 
         return render(request, 'products/products.html', context={
@@ -62,8 +60,7 @@ def delete_product(request, product_id):
 @login_required(login_url='/auth/login')
 def edit_product(request, product_id):
     produto = get_object_or_404(Produto, id=product_id)
-    produtos = Produto.objects.filter(
-        vendedor=request.user).order_by('-id')
+    produtos = Produto.objects.all().order_by('-id')
     form = ProdutoForm(instance=produto)
     if request.method == 'GET':
         return render(request, 'products/edit_product.html', context={
@@ -85,3 +82,12 @@ def edit_product(request, product_id):
                 'produto': produto,
                 'produtos': produtos,
             })
+
+
+@login_required(login_url='/auth/login')
+def detail_product(request, product_id):
+    produto = get_object_or_404(Produto, id=product_id)
+
+    return render(request, 'products/detail_product.html', context={
+        'produto': produto,
+    })
