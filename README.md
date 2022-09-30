@@ -11,10 +11,12 @@ Um sistema administrativo para uma loja de smartphones.
 - Deletar produtos
 - Editar produtos
 - listar produtos cadastrados
-### funcionalidades a serem implementadas:
 - Cadastro de clientes
+
+### funcionalidades a serem implementadas:
 - Vincular um venda de um produto a um cliente
 - Mandar mensagem automatica para cliente no whatsapp
+- Fazer controle de garatia dos produtos
 
 
 ## :camera: Layout web
