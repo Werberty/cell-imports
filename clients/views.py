@@ -1,10 +1,12 @@
 from ast import Return
+from multiprocessing import context
 from operator import contains
 
 from django.contrib import messages
 from django.contrib.messages import constants
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
+from sales.models import Venda
 
 from .forms import ClientesForm
 from .models import Cliente
@@ -45,15 +47,14 @@ def clients(request):
 
 def edit_client(request, id_client):
     cliente = get_object_or_404(Cliente, id=id_client)
-    clientes = Cliente.objects.all().order_by('-id')
-    form = ClientesForm(instance=cliente)
+
     if request.method == 'GET':
-        return render(request, 'clients/edit_client.html', context={
-            'cliente': cliente,
-            'clientes': clientes,
-            'form': form,
-        })
-    if request.method == 'POST':
+        clientes = Cliente.objects.all().order_by('-id')
+        form = ClientesForm(instance=cliente)
+        context = {'form': form, 'cliente': cliente, 'clientes': clientes}
+        return render(request, 'clients/edit_client.html', context)
+
+    elif request.method == 'POST':
         form = ClientesForm(request.POST, instance=cliente)
 
         if form.is_valid():
@@ -63,18 +64,18 @@ def edit_client(request, id_client):
         else:
             messages.add_message(request, constants.ERROR, 'Erro ao editar')
             form = ClientesForm(request.POST)
+            cliente = get_object_or_404(Cliente, id=id_client)
+            clientes = Cliente.objects.all().order_by('-id')
+            context = {'form': form, 'cliente': cliente,
+                       'clientes': clientes}
 
-            return render(request, 'clients/clients.html', context={
-                'form': form,
-            })
+            return render(request, 'clients/edit_client.html', context)
 
         form = ClientesForm()
+        clientes = Cliente.objects.all().order_by('-id')
+        context = {'clientes': clientes, 'form': form}
 
-        return render(request, 'clients/clients.html', context={
-            'cliente': cliente,
-            'clientes': clientes,
-            'form': form,
-        })
+        return render(request, 'clients/clients.html', context)
 
 
 def delete_client(request, id_client):
@@ -89,7 +90,9 @@ def delete_client(request, id_client):
 
 def detail_client(request, id_client):
     cliente = get_object_or_404(Cliente, id=id_client)
-    compras = cliente.venda_set.all()
+    # compras = cliente.vendas.all()[0]
+    compras = Venda.objects.filter(cliente__id=id_client)
+    print(compras)
 
     return render(request, 'clients/detail_client.html', context={
         'cliente': cliente,

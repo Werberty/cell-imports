@@ -31,7 +31,7 @@
             <p>
                 <ul>
                     {% for compra in compras %}
-                        <li><a class="link-dark" href="{% url 'products:detail_product' compra.id %}">{{ compra }}</a></li>
+                        <li><a class="link-dark" href="{% url 'products:detail_product' compra.produto.id %}">{{ compra }}</a></li>
                     {% endfor %}
                 </ul>
             </p>

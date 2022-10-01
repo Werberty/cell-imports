@@ -6,11 +6,11 @@ from products.models import Produto
 
 class Venda(models.Model):
     vendedor = models.ForeignKey(
-        User, on_delete=models.DO_NOTHING)
+        User, on_delete=models.DO_NOTHING, related_name='vendas')
     cliente = models.ForeignKey(
-        Cliente, on_delete=models.DO_NOTHING)
+        Cliente, on_delete=models.DO_NOTHING, related_name='vendas')
     produto = models.OneToOneField(
-        Produto, on_delete=models.DO_NOTHING)
+        Produto, on_delete=models.DO_NOTHING, related_name='vendas')
     valor_venda = models.FloatField(verbose_name='Valor da venda')
     saled_at = models.DateTimeField(auto_now_add=True)
 

@@ -1,0 +1,27 @@
+<div class="card mb-4">
+    <div class="card-header">
+      <i class="fas fa-table me-1"></i>
+      Lista de vendas
+    </div>
+    <div class="card-body">
+        <table class="table table-striped" id="table-clients" class="display" style="width:100%">
+            <thead>
+                <tr class="table-dark">
+                    <td class="col">Cliente</td>
+                    <td class="col">Produto</td>
+                    <td class="col">Código do produto</td>
+                    <td class="col">Vendido em</td>
+                </thead>
+                {% for venda in vendas %}
+                <tbody>
+                    <tr>
+                        <td class="col">{{venda.cliente}}</td>
+                        <td class="col">{{ venda.produto }}</td>
+                        <td class="col">{{venda.produto.codigo_produto}}</td>
+                        <td class="col">{{venda.saled_at}}</td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+        </table>
+    </div>
+</div>
