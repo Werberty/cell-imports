@@ -17,7 +17,7 @@
         <tbody>
           {% for cliente in clientes %}
           <tr>
-            <td>{{ cliente.nome }} {{ cliente.sobrenome }}</td>
+            <td><a class="link-dark" href="{% url 'clients:detail_client' cliente.id %}">{{ cliente.nome }} {{ cliente.sobrenome }}</a></td>
             <td>{{ cliente.telefone }}</td>
             <td>{{ cliente.email }}</td>
             <td>

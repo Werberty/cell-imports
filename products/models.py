@@ -31,8 +31,9 @@ class Produto(models.Model):
     cor = models.CharField(max_length=35)
     memoria = models.IntegerField(choices=MEMORIA_CHOICES)
     armazenamento = models.IntegerField(choices=ARMAZ_CHOICES)
-    codigo_produto = models.CharField(max_length=65, blank=True)
-    valor_compra = models.FloatField()
+    codigo_produto = models.CharField(
+        max_length=6, blank=True, verbose_name='Código do produto')
+    valor_compra = models.FloatField(verbose_name='Valor da compra')
     vendido = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)

@@ -34,6 +34,11 @@ def products(request):
                 request, constants.SUCCESS, 'Produto cadastrado')
         else:
             messages.add_message(request, constants.ERROR, 'Erro ao cadastrar')
+            form = ProdutoForm(request.POST)
+
+            return render(request, 'products/products.html', context={
+                'form': form,
+            })
 
         produtos = Produto.objects.filter(vendido=False).order_by('-id')
         form = ProdutoForm()

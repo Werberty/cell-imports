@@ -28,6 +28,12 @@ def clients(request):
                 request, constants.SUCCESS, 'Cliente cadastrado')
         else:
             messages.add_message(request, constants.ERROR, 'Erro ao cadastrar')
+            clientes = Cliente.objects.all().order_by('-id')
+            form = ClientesForm(request.POST)
+            return render(request, 'clients/clients.html', context={
+                'form': form,
+                'clientes': clientes,
+            })
 
         clientes = Cliente.objects.all().order_by('-id')
         form = ClientesForm()
@@ -56,6 +62,11 @@ def edit_client(request, id_client):
                 request, constants.SUCCESS, 'Cliente editado')
         else:
             messages.add_message(request, constants.ERROR, 'Erro ao editar')
+            form = ClientesForm(request.POST)
+
+            return render(request, 'clients/clients.html', context={
+                'form': form,
+            })
 
         form = ClientesForm()
 
@@ -78,7 +89,9 @@ def delete_client(request, id_client):
 
 def detail_client(request, id_client):
     cliente = get_object_or_404(Cliente, id=id_client)
+    compras = cliente.venda_set.all()
 
     return render(request, 'clients/detail_client.html', context={
         'cliente': cliente,
+        'compras': compras,
     })

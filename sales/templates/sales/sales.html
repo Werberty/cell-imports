@@ -21,13 +21,13 @@
                 {% csrf_token %}
                 {% include 'global/partials/messages.html' %}
 
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                     {{ form.cliente|as_crispy_field }}
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                     {{ form.produto|as_crispy_field }}
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                     {{ form.valor_venda|as_crispy_field }}
                 </div>
 
@@ -49,8 +49,8 @@
                         {% endfor %}
                     </datalist>
                 </div> {% endcomment %}
-                <div class="d-grid gap-2 col-6 mx-auto">
-                    <button type="submit" class="btn btn-primary">Adicionar</button>
+                <div class="d-grid gap-2 col-4 mx-auto">
+                    <button type="submit" class="btn btn-primary">Confirmar</button>
                 </div>
             </form>
         </div>

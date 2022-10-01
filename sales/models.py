@@ -11,7 +11,7 @@ class Venda(models.Model):
         Cliente, on_delete=models.DO_NOTHING)
     produto = models.OneToOneField(
         Produto, on_delete=models.DO_NOTHING)
-    valor_venda = models.FloatField()
+    valor_venda = models.FloatField(verbose_name='Valor da venda')
     saled_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:

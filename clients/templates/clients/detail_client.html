@@ -30,8 +30,8 @@
         <div class="card-body">
             <p>
                 <ul>
-                    {% for compra in cliente.venda_set.all %}
-                        <li><a href="{% url 'products:detail_product' compra.id %}">{{ compra }}</a></li>
+                    {% for compra in compras %}
+                        <li><a class="link-dark" href="{% url 'products:detail_product' compra.id %}">{{ compra }}</a></li>
                     {% endfor %}
                 </ul>
             </p>
