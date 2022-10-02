@@ -30,25 +30,7 @@
                 <div class="col-sm-4">
                     {{ form.valor_venda|as_crispy_field }}
                 </div>
-
-                {% comment %} <div class="col-sm-6">
-                    <label for="exampleDataList" class="form-label">Cliente</label>
-                    <input name="cliente" class="form-control" list="datalistClients" id="exampleDataList" placeholder="Procure um cliente...">
-                    <datalist id="datalistClients">
-                        {% for cliente in clientes %}
-                            <option value="{{ cliente.nome }} {{ cliente.sobrenome }}">
-                        {% endfor %}
-                    </datalist>
-                </div>
-                <div class="col-sm-6">
-                    <label for="exampleDataList" class="form-label">Produto</label>
-                    <input name="produto" class="form-control" list="datalistProducts" id="exampleDataList" placeholder="Procure um produto...">
-                    <datalist id="datalistProducts">
-                        {% for produto in produtos %}
-                            <option value="{{ produto.marca }} {{ produto.modelo }}">
-                        {% endfor %}
-                    </datalist>
-                </div> {% endcomment %}
+                
                 <div class="d-grid gap-2 col-4 mx-auto">
                     <button type="submit" class="btn btn-primary">Confirmar</button>
                 </div>

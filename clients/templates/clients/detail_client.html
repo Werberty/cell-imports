@@ -16,8 +16,8 @@
         <div class="card-body">
             <p>
                 <ul>
-                    <li>Telefone: {{ cliente.telefone }}</li>
-                    <li>Email: {{ cliente.email }}</li>
+                    <li><strong>Telefone:</strong> {{ cliente.telefone }}</li>
+                    <li><strong>Email:</strong> {{ cliente.email }}</li>
                 </ul>
             </p>
         </div>
@@ -28,13 +28,24 @@
             Compras
         </div>
         <div class="card-body">
-            <p>
-                <ul>
-                    {% for compra in compras %}
-                        <li><a class="link-dark" href="{% url 'products:detail_product' compra.produto.id %}">{{ compra }}</a></li>
-                    {% endfor %}
-                </ul>
-            </p>
+            <table class="table">
+                <thead class="table-primary">
+                  <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Data da venda</th>
+                    <th scope="col">Valor da venda</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for compra in compras %}
+                <tr>
+                    <td><a class="link-dark" href="{% url 'products:detail_product' compra.produto.id %}">{{ compra.produto.marca }} {{ compra.produto.modelo }}</a></td>
+                    <td>{{ compra.saled_at }}</td>
+                    <td>R$ {{ compra.valor_venda }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+              </table>
         </div>
     </div>
     <div style="height: 100vh"></div>

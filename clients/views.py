@@ -90,9 +90,7 @@ def delete_client(request, id_client):
 
 def detail_client(request, id_client):
     cliente = get_object_or_404(Cliente, id=id_client)
-    # compras = cliente.vendas.all()[0]
     compras = Venda.objects.filter(cliente__id=id_client)
-    print(compras)
 
     return render(request, 'clients/detail_client.html', context={
         'cliente': cliente,

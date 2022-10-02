@@ -20,11 +20,21 @@
                     <li><strong>Memória:</strong> {{ produto.memoria }}Gb RAM</li>
                     <li><strong>Armazenamento:</strong> {{ produto.armazenamento }}Gb ROM</li>
                     <li><strong>Valor da compra:</strong> R$ {{ produto.valor_compra }}</li>
-                    <li><strong>Status:</strong> {% if produto.status %}Vendido {% else %}Em estoque {% endif %}</li>
+                    <li><strong>Status:</strong> 
+                        {% if produto.vendido %}
+                            Vendido 
+                        {% else %}
+                            Em estoque 
+                        {% endif %}
+                    </li>
                     <br>
                     <li><strong>Cadastrado em:</strong> {{ produto.created_at }}</li>
-                    <br> 
-                    <li>Vendido para: {{ produto.comprador }}</li>
+                    {% if produto.vendas.saled_at %}
+                        <li><strong>Vendido para:</strong>
+                            {{ produto.vendas.cliente.nome }} {{ produto.vendas.cliente.sobrenome }}
+                        </li>
+                        <li><strong>Vendido em:</strong> {{ produto.vendas.saled_at }}</li>
+                    {% endif %}
                 </ul>
             </p>
         </div>

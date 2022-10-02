@@ -13,6 +13,7 @@
           <td scope="col" >Cor</td>
           <td scope="col" >Memória</td>
           <td scope="col" >Armazenamento</td>
+          <td scope="col" >Código do produto</td>
           <td scope="col" >Ações</td>
         </tr>
       </thead>
@@ -25,6 +26,7 @@
           <td>{{ produto.cor }}</td>
           <td>{{ produto.memoria }}Gb RAM</td>
           <td>{{ produto.armazenamento }}Gb ROM</td>
+          <td>{{ produto.codigo_produto }}</td>
           <td>
             <abbr title="Ver detalhes" class="me-3"><a href="{% url 'products:detail_product' produto.id %}" class="link-success"><i class="fa-solid fa-eye"></i></a></abbr>
             <abbr title="Editar" class="me-3"><a href="{% url 'products:edit_product' produto.id %}" class="link-primary"><i class="fa-solid fa-solid fa-pen"></i></a></abbr>
@@ -40,46 +42,4 @@
     </table>
   </div>
 </div>
-    
-<!-- Js Datatables-->
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.12.1/datatables.min.js"></script>
-
-<script>
-  $(document).ready( function () {
-
-    $('#table-products').DataTable({
-        responsive: true,
-        // "bSort": false,
-        "lengthMenu": [ 5, 10, 20, 50 ],
-        "aaSorting": [],
-        "pageLength": 10,
-        "language": {
-            "decimal": "",
-            "emptyTable": "Sem dados disponíveis",
-            "info": "Mostrando de _START_ até _END_ de _TOTAL_ registos",
-            "infoEmpty": "Mostrando de 0 até 0 de 0 registos",
-            "infoFiltered": "(filtrado de _MAX_ registos no total)",
-            "infoPostFix": "",
-            "thousands": ",",
-            "lengthMenu": "Mostrar _MENU_ registos",
-            "loadingRecords": "A carregar dados...",
-            "processing": "A processar...",
-            "search": "Procurar:",
-            "zeroRecords": "Não foram encontrados resultados",
-            "paginate": {
-                "first": "Primeiro",
-                "last": "Último",
-                "next": "Seguinte",
-                "previous": "Anterior"
-            },
-            "aria": {
-                "sortAscending": ": ordem crescente",
-                "sortDescending": ": ordem decrescente"
-            }
-        }
-    });
-
-  } );
-</script>
-
 

@@ -25,8 +25,19 @@ def products(request):
 
     elif request.method == 'POST':
         form = ProdutoForm(request.POST)
+        codigo_produto = request.POST.get('codigo_produto')
 
-        if form.is_valid():
+        if Produto.objects.filter(codigo_produto=codigo_produto).exists():
+            messages.add_message(request, constants.ERROR,
+                                 'Código do produto já existente!')
+            produtos = Produto.objects.filter(vendido=False).order_by('-id')
+            form = ProdutoForm(request.POST)
+
+            return render(request, 'products/products.html', context={
+                'produtos': produtos,
+                'form': form,
+            })
+        elif form.is_valid():
             form_prod = form.save(commit=False)
             form_prod.vendedor = request.user
             form_prod.save()

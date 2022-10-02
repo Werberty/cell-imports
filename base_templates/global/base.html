@@ -17,8 +17,6 @@
     <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
-    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
-
     <!-- Js Datatables-->
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.12.1/datatables.min.js"></script>
 
@@ -26,9 +24,10 @@
     <script src="{% static 'js/jquery.mask.min.js' %}"></script>
     <script src="{% static 'js/mascara.js' %}"></script>
 
+    
     <script>
         $(document).ready(function(){
-
+            
             var SPMaskBehavior = function (val) {
                 return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
             },
@@ -39,8 +38,46 @@
             };
             
             $('#id_telefone').mask(SPMaskBehavior, spOptions);
-
+            
         });
+    </script>
+
+    <script>
+        $(document).ready( function () {
+            
+            $('#table-products').DataTable({
+                responsive: true,
+                // "bSort": false,
+                "lengthMenu": [ 5, 10, 20, 50 ],
+                "aaSorting": [],
+                "pageLength": 10,
+                "language": {
+                    "decimal": "",
+                    "emptyTable": "Sem dados disponíveis",
+                    "info": "Mostrando de _START_ até _END_ de _TOTAL_ registos",
+                    "infoEmpty": "Mostrando de 0 até 0 de 0 registos",
+                    "infoFiltered": "(filtrado de _MAX_ registos no total)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ registos",
+                    "loadingRecords": "A carregar dados...",
+                    "processing": "A processar...",
+                    "search": "Procurar:",
+                    "zeroRecords": "Não foram encontrados resultados",
+                    "paginate": {
+                        "first": "Primeiro",
+                        "last": "Último",
+                        "next": "Seguinte",
+                        "previous": "Anterior"
+                    },
+                    "aria": {
+                        "sortAscending": ": ordem crescente",
+                        "sortDescending": ": ordem decrescente"
+                    }
+                }
+            });
+
+        } );
     </script>
 
 </body>
