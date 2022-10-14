@@ -1,7 +1,3 @@
-from ast import Return
-from multiprocessing import context
-from operator import contains
-
 from django.contrib import messages
 from django.contrib.messages import constants
 from django.shortcuts import get_object_or_404, redirect, render

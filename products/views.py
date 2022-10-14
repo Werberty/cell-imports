@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.messages import constants
-from django.core.exceptions import ValidationError
+from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 
@@ -16,44 +16,40 @@ def home(request):
 
 @login_required(login_url='/auth/login')
 def products(request):
-    if request.method == 'GET':
-        produtos = Produto.objects.filter(vendido=False).order_by('-id')
-        form = ProdutoForm()
-        return render(request, 'products/products.html', context={
-            'produtos': produtos,
-            'form': form,
-        })
+    product_form_data = request.session.get('product_form_data') or None
+    produtos = Produto.objects.filter(vendido=False).order_by('-id')
+    form = ProdutoForm(product_form_data)
+    return render(request, 'products/products.html', context={
+        'produtos': produtos,
+        'form': form,
+    })
 
-    elif request.method == 'POST':
-        form = ProdutoForm(request.POST)
 
-        if form.is_valid():
-            form_prod = form.save(commit=False)
-            form_prod.vendedor = request.user
-            # codigo = form_prod.cleaned_data.get('codigo_produto', '')
-            exists = Produto.objects.filter(
-                codigo_produto=form_prod.codigo_produto).exists()
+@login_required(login_url='/auth/login')
+def create_product(request):
+    if not request.POST:
+        raise Http404()
 
-            if exists:
-                messages.error(request, 'Código do produto já existe')
-                return redirect(reverse('products:products'))
+    POST = request.POST
+    request.session['product_form_data'] = POST
+    form = ProdutoForm(POST)
 
-            form_prod.save()
-            messages.success(request, 'Produto cadastrado')
-        else:
-            form = ProdutoForm(request.POST)
+    if form.is_valid():
+        form_prod = form.save(commit=False)
+        form_prod.vendedor = request.user
+        codigo = form_prod.codigo_produto
+        exists = Produto.objects.filter(
+            codigo_produto=codigo).exists()
 
-            return render(request, 'products/products.html', context={
-                'form': form,
-            })
+        if exists:
+            messages.error(request, 'Código do produto já existe')
+            return redirect(reverse('products:products'))
 
-        produtos = Produto.objects.filter(vendido=False).order_by('-id')
-        form = ProdutoForm()
+        form_prod.save()
+        del(request.session['product_form_data'])
+        messages.success(request, 'Produto cadastrado')
 
-        return render(request, 'products/products.html', context={
-            'produtos': produtos,
-            'form': form,
-        })
+    return redirect(reverse('products:products'))
 
 
 @login_required(login_url='/auth/login')
@@ -87,13 +83,18 @@ def edit_product(request, product_id):
         if form.is_valid():
             form_prod = form.save(commit=False)
 
+            codigo = form_prod.codigo_produto
             exists = Produto.objects.filter(
-                codigo_produto=form_prod.codigo_produto
+                codigo_produto=codigo
             ).exclude(id=produto.id).exists()
 
             if exists:
                 messages.error(request, 'Código do produto já existe')
-                return redirect(reverse('products:products'))
+                return render(request, 'products/edit_product.html', context={
+                    'form': form,
+                    'produto': produto,
+                    'produtos': produtos,
+                })
 
             form_prod.save()
 
