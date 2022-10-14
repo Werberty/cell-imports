@@ -15,7 +15,7 @@
           Cadastre clientes
         </div>
         <div class="card-body">
-            <form class="row gx-3 gy-2 align-items-center" action="{% url 'clients:clients' %}" method="POST">
+            <form class="row gx-3 gy-2 align-items-center" action="{% url 'clients:create_client' %}" method="POST">
                 {% csrf_token %}
                 {% include 'global/partials/messages.html' %}
                 <div class="col-sm-3">

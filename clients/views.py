@@ -1,5 +1,8 @@
+from curses.ascii import HT
+
 from django.contrib import messages
 from django.contrib.messages import constants
+from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from sales.models import Venda
@@ -9,36 +12,31 @@ from .models import Cliente
 
 
 def clients(request):
-    if request.method == 'GET':
-        clientes = Cliente.objects.all().order_by('-id')
-        form = ClientesForm()
-        return render(request, 'clients/clients.html', context={
-            'form': form,
-            'clientes': clientes,
-        })
-    if request.method == 'POST':
-        form = ClientesForm(request.POST)
-        if form.is_valid():
-            form_client = form.save(commit=False)
-            form_client.vendedor = request.user
-            form_client.save()
-            messages.add_message(
-                request, constants.SUCCESS, 'Cliente cadastrado')
-        else:
-            messages.add_message(request, constants.ERROR, 'Erro ao cadastrar')
-            clientes = Cliente.objects.all().order_by('-id')
-            form = ClientesForm(request.POST)
-            return render(request, 'clients/clients.html', context={
-                'form': form,
-                'clientes': clientes,
-            })
+    client_form_data = request.session.get('client_form_data') or None
+    clientes = Cliente.objects.all().order_by('-id')
+    form = ClientesForm(client_form_data)
+    return render(request, 'clients/clients.html', context={
+        'form': form,
+        'clientes': clientes,
+    })
 
-        clientes = Cliente.objects.all().order_by('-id')
-        form = ClientesForm()
-        return render(request, 'clients/clients.html', context={
-            'form': form,
-            'clientes': clientes,
-        })
+
+def create_client(request):
+    if not request.POST:
+        raise Http404()
+
+    POST = request.POST
+    request.session['client_form_data'] = POST
+    form = ClientesForm(POST)
+
+    if form.is_valid():
+        form_client = form.save(commit=False)
+        form_client.vendedor = request.user
+        form_client.save()
+        del(request.session['client_form_data'])
+        messages.success(request, 'Cliente cadastrado')
+
+    return redirect(reverse('clients:clients'))
 
 
 def edit_client(request, id_client):

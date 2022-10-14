@@ -2,7 +2,6 @@ import re
 
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm
-from pyexpat import model
 
 from .models import Cliente
 
@@ -24,8 +23,10 @@ class ClientesForm(ModelForm):
 
     def clean_email(self):
         email = self.cleaned_data["email"]
+
         regex = re.compile(
             r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')
         if not bool(re.fullmatch(regex, email)):
             raise ValidationError('Email inválido!')
+
         return email
