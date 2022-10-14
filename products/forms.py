@@ -7,6 +7,10 @@ from .models import Produto
 
 
 class ProdutoForm(ModelForm):
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
+        self.fields['codigo_produto'].widget.attrs['autocomplete'] = 'off'
+
     class Meta:
         model = Produto
         fields = [
@@ -21,9 +25,17 @@ class ProdutoForm(ModelForm):
 
     def clean_codigo_produto(self):
         codigo = self.cleaned_data["codigo_produto"]
+        exists = Produto.objects.filter(codigo_produto=codigo).exists()
+
+        if exists:
+            raise ValidationError(
+                'Código de produto já existe',
+                code='invalid'
+            )
+
         if not (len(codigo.strip()) > 0):
             raise ValidationError('String vázia!')
         elif not bool(re.match('^[A-Za-z0-9_-]*$', codigo)):
             raise ValidationError('Somente letras e números!')
-        else:
-            return codigo.upper()
+
+        return codigo.upper()
