@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.messages import constants
+from django.core.exceptions import ValidationError
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 
@@ -29,6 +30,14 @@ def products(request):
         if form.is_valid():
             form_prod = form.save(commit=False)
             form_prod.vendedor = request.user
+            # codigo = form_prod.cleaned_data.get('codigo_produto', '')
+            exists = Produto.objects.filter(
+                codigo_produto=form_prod.codigo_produto).exists()
+
+            if exists:
+                messages.error(request, 'Código do produto já existe')
+                return redirect(reverse('products:products'))
+
             form_prod.save()
             messages.success(request, 'Produto cadastrado')
         else:
@@ -63,8 +72,9 @@ def delete_product(request, product_id):
 @login_required(login_url='/auth/login')
 def edit_product(request, product_id):
     produto = get_object_or_404(Produto, id=product_id)
-    produtos = Produto.objects.all().order_by('-id')
+    produtos = Produto.objects.filter(vendido=False).order_by('-id')
     form = ProdutoForm(instance=produto)
+
     if request.method == 'GET':
         return render(request, 'products/edit_product.html', context={
             'form': form,
@@ -75,7 +85,18 @@ def edit_product(request, product_id):
         form = ProdutoForm(request.POST, instance=produto)
 
         if form.is_valid():
-            form.save()
+            form_prod = form.save(commit=False)
+
+            exists = Produto.objects.filter(
+                codigo_produto=form_prod.codigo_produto
+            ).exclude(id=produto.id).exists()
+
+            if exists:
+                messages.error(request, 'Código do produto já existe')
+                return redirect(reverse('products:products'))
+
+            form_prod.save()
+
             messages.add_message(request, constants.SUCCESS, 'Produto editado')
             return redirect(reverse('products:products'))
         else:

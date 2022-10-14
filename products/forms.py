@@ -24,14 +24,7 @@ class ProdutoForm(ModelForm):
         ]
 
     def clean_codigo_produto(self):
-        codigo = self.cleaned_data["codigo_produto"]
-        exists = Produto.objects.filter(codigo_produto=codigo).exists()
-
-        if exists:
-            raise ValidationError(
-                'Código de produto já existe',
-                code='invalid'
-            )
+        codigo = self.cleaned_data.get('codigo_produto', '')
 
         if not (len(codigo.strip()) > 0):
             raise ValidationError('String vázia!')
