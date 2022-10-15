@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nota fiscal</title>
+    <style>
+        .card {
+            border: 1px solid black;
+            padding: 5px;
+        }
+
+        h1,
+        h2 {
+            margin-bottom: 5px;
+        }
+
+        .card p,
+        h2,
+        h1 {
+            display: inline;
+        }
+
+        .col2 {
+            text-align: left;
+        }
+
+        .col2 {
+            text-align: right;
+        }
+
+        .table {
+            border: 1px solid rgb(17, 17, 17);
+            padding: 3px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <hr class="border">
+
+        <div class="row">
+            <div class="col text-start">
+                <table>
+                    <tr>
+                        <th class="col1" scope="col" style="text-align: lefth;">
+                            <h1>Cell Imports</h1>
+                        </th>
+                        <th class="col2" scope="col">
+                            <h2>&#40;88&#41; 99769-4763</h2>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td class="col1">
+                            <address>Rua Algum Lugar Silva - Bairro - Brazil - CE</address>
+                        </td>
+                        <td class="col2">
+                            <p>cell.imports@email.com</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col1">
+                            <p>Werberty Alexandre de Sousa</p>
+                        </td>
+                        <td class="col2">CNPJ: 13.654.225/0001-03</td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+
+        <hr class="border">
+
+        <div class="card">
+            <h2>{{ venda.cliente }}</h2><br>
+            <p>{{ venda.cliente.telefone }}</p><br>
+            <p>{{ venda.cliente.email }}</p>
+        </div>
+        <br>
+        <table class="table">
+            <thead>
+                <tr class="table-secondary">
+                    <th class="col">Produto</th>
+                    <th class="col">Cor</th>
+                    <th class="col">Código do produto</th>
+                    <th class="col">Valor da venda</th>
+                    <th class="col">Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="col">{{ venda.produto }} / {{venda.produto.armazenamento}}Gb ROM</td>
+                    <td class="col">{{ venda.produto.cor }}</td>
+                    <td class="col">{{venda.produto.codigo_produto}}</td>
+                    <td class="col">R$ {{venda.valor_venda}}</td>
+                    <td class="col">R$ {{venda.valor_venda}}</td>
+                </tr>
+                <tr>
+                    <td class="col" colspan="3"></td>
+                    <td class="col">Total: </td>
+                    <td class="col"><strong>R$ {{venda.valor_venda}}</strong></td>
+
+                </tr>
+            </tbody>
+        </table>
+        <hr class="border">
+        <div class="pt-2 pb-1">
+            <p><strong>Condições de pagamento:</strong></p>
+            <p><strong>Forma de pagamento: </strong>Dinheiro</p>
+            <table class="table">
+                <thead>
+                    <th scope="col">Qtd</th>
+                    <th scope="col">Vendido em</th>
+                    <th scope="col">Valor &#40;R$&#41;</th>
+                </thead>
+                <tbody>
+                    <td>1</td>
+                    <td>{{ venda.saled_at }}</td>
+                    <td>{{ venda.valor_venda }}</td>
+                </tbody>
+            </table>
+        </div>
+        <hr class="border">
+        <div class="card">
+            <h2>Observações:</h2><br>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, magni delectus id quas in
+                corrupti odit repellendus eligendi debitis. Dolor quod impedit neque enim pariatur distinctio
+                excepturi saepe rem eligendi.</p>
+        </div>
+    </div>
+</body>
+
+</html>

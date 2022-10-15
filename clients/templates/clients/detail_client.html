@@ -34,6 +34,7 @@
                     <th scope="col">Nome</th>
                     <th scope="col">Data da venda</th>
                     <th scope="col">Valor da venda</th>
+                    <th scope="col" colspan="2">Nota fiscal</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,6 +43,8 @@
                     <td><a class="link-dark" href="{% url 'products:detail_product' compra.produto.id %}">{{ compra.produto.marca }} {{ compra.produto.modelo }}</a></td>
                     <td>{{ compra.saled_at }}</td>
                     <td>R$ {{ compra.valor_venda }}</td>
+                    <td><a href="{% url 'sales:down_nota_fiscal' compra.id %}" target="_blank">Baixar</a></td>
+                    <td><a href="{% url 'sales:view_nota_fiscal' compra.id %}" target="_blank">Visualizar</a></td>
                 </tr>
                 {% endfor %}
                 </tbody>

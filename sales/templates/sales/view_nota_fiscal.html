@@ -1,0 +1,93 @@
+{% extends 'global/base.html' %}
+
+{% block body %}
+<div class="container mt-5">
+    <hr class="border border-dark border-2 opacity-50">
+
+    <div class="row">
+        <div class="col text-start">
+            <h1>
+                <i class="fa-solid fa-mobile-screen-button"></i>
+                Cell Imports
+            </h1>
+            <address>Rua Algum Lugar Silva - Bairro - Brazil - CE</address>
+            <p>Werberty Alexandre de Sousa</p>
+        </div>
+        <div class="col text-end">
+            <h3>&#40;88&#41; 99769-4763</h3>
+            <p>cell.imports@email.com</p>
+            <td class="col2">CNPJ: 13.654.225/0001-03</td>
+        </div>
+    </div>
+
+    <hr class="border border-dark border-2 opacity-50">
+
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col text-start">
+                    <h5>{{ venda.cliente }}</h5>
+                </div>
+                <div class="col text-end">
+                    <p>{{ venda.cliente.telefone }}</p>
+                    <p>{{ venda.cliente.email }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <table class="table table-striped" id="table-sale">
+        <thead>
+            <tr class="table-secondary">
+                <th class="col">Produto</th>
+                <th class="col">Cor</th>
+                <th class="col">Código do produto</th>
+                <th class="col">Valor da venda</th>
+                <th class="col">Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="col">{{ venda.produto }} / {{venda.produto.armazenamento}}Gb ROM</td>
+                <td class="col">{{ venda.produto.cor }}</td>
+                <td class="col">{{venda.produto.codigo_produto}}</td>
+                <td class="col">R$ {{venda.valor_venda}}</td>
+                <td class="col">R$ {{venda.valor_venda}}</td>
+            </tr>
+            <tr>
+                <td class="col" colspan="3"></td>
+                <td class="col">Total:</td>
+                <td class="col"><strong>R$ {{venda.valor_venda}}</strong></td>
+
+            </tr>
+        </tbody>
+    </table>
+    <hr class="border border-dark border-1 opacity-50">
+    <div class="pt-2 pb-1">
+        <p><strong>Condições de pagamento:</strong></p>
+        <p><strong>Forma de pagamento: </strong>Dinheiro</p>
+        <table class="table">
+            <thead>
+                <th scope="col">Qtd</th>
+                <th scope="col">Vendido em</th>
+                <th scope="col">Valor &#40;R$&#41;</th>
+            </thead>
+            <tbody>
+                <td>1</td>
+                <td>{{ venda.saled_at }}</td>
+                <td>{{ venda.valor_venda }}</td>
+            </tbody>
+        </table>
+    </div>
+    <hr class="border border-dark border-1 opacity-50">
+    <div class="card">
+        <div class="card-body">
+            <h5>Observações</h5>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, magni delectus id quas in
+                corrupti odit repellendus eligendi debitis. Dolor quod impedit neque enim pariatur distinctio
+                excepturi saepe rem eligendi.</p>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

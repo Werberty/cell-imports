@@ -11,15 +11,18 @@
                     <td class="col">Produto</td>
                     <td class="col">Código do produto</td>
                     <td class="col">Vendido em</td>
+                    <td class="col" colspan="2">Nota fiscal</td>
                 </tr>
             </thead>
             <tbody>
                 {% for venda in vendas %}
                 <tr>
-                    <td class="col">{{venda.cliente}}</td>
+                    <td class="col"><a class="link-dark" href="{% url 'clients:detail_client' venda.cliente.id %}">{{venda.cliente}}</a></td>
                     <td class="col">{{ venda.produto }}</td>
                     <td class="col">{{venda.produto.codigo_produto}}</td>
                     <td class="col">{{venda.saled_at}}</td>
+                    <td><a href="{% url 'sales:down_nota_fiscal' venda.id %}" target="_blank">Baixar</a></td>
+                    <td><a href="{% url 'sales:view_nota_fiscal' venda.id %}" target="_blank">Visualizar</a></td>
                 </tr>
                 {% endfor %}
             </tbody>

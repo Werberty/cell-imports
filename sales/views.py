@@ -1,48 +1,22 @@
 from django.contrib import messages
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.shortcuts import redirect, render
+from django.template.loader import get_template
 from django.urls import reverse
 from products.models import Produto
+from xhtml2pdf import pisa
 
 from sales.forms import VendasForm
 from sales.models import Venda
 
 
 def sales(request):
-    # if request.method == 'GET':
     sales_form_data = request.session.get('sales_form_data') or None
     form = VendasForm(sales_form_data)
     vendas = Venda.objects.all().order_by('-id')
     context = {'form': form, 'vendas': vendas}
 
     return render(request,  'sales/sales.html', context)
-    # elif request.method == 'POST':
-    #     form = VendasForm(request.POST)
-
-    #     if form.is_valid():
-    #         form_venda = form.save(commit=False)
-    #         form_venda.vendedor = request.user
-
-    #         form_venda.save()
-    #         messages.add_message(
-    #             request, constants.SUCCESS, 'Venda cadastrada')
-    #     else:
-    #         messages.add_message(request, constants.ERROR, 'Erro ao cadastrar')
-    #         form = VendasForm(request.POST)
-    #         vendas = Venda.objects.all().order_by('-id')
-    #         context = {'form': form, 'vendas': vendas}
-
-    #         return render(request, 'sales/sales.html', context)
-
-    #     produto = Produto.objects.get(id=request.POST.get('produto'))
-    #     produto.vendido = True
-    #     produto.save()
-
-    #     form = VendasForm()
-    #     vendas = Venda.objects.all().order_by('-id')
-    #     context = {'form': form, 'vendas': vendas}
-
-    #     return render(request, 'sales/sales.html', context)
 
 
 def create_sales(request):
@@ -67,3 +41,34 @@ def create_sales(request):
         messages.success(request, 'Venda cadastrada')
 
     return redirect(reverse('sales:create_sales'))
+
+
+def view_nota_fiscal(request, id_sale):
+    sales_form_data = request.session.get('sales_form_data') or None
+    form = VendasForm(sales_form_data)
+    venda = Venda.objects.get(id=id_sale)
+    context = {'form': form, 'venda': venda}
+
+    return render(request, 'sales/view_nota_fiscal.html', context)
+
+
+def down_nota_fiscal(request, id_sale):
+    venda = Venda.objects.get(id=id_sale)
+
+    template_path = 'sales/down_nota_fiscal.html'
+    context = {'venda': venda}
+
+    # Create a Django response object, and specify content_type as pdf
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'filename="nota-fiscal-{venda.produto}.pdf"'  # noqa: E501
+    # find the template and render it.
+    template = get_template(template_path)
+    html = template.render(context)
+
+    # create a pdf
+    pisa_status = pisa.CreatePDF(
+        html, dest=response)
+    # if error then show some funny view
+    if pisa_status.err:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
