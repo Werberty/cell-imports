@@ -1,7 +1,6 @@
 
 from django.urls import resolve, reverse
 from products import views
-from pytest import skip
 
 from .test_products_base import ProductsTestBase
 
@@ -14,6 +13,10 @@ class ProductViewsTest(ProductsTestBase):
     def test_products_product_view_function_is_correct(self):
         view = resolve(reverse('products:products'))
         self.assertIs(view.func, views.products)
+
+    def test_products_create_product_view_function_is_correct(self):
+        view = resolve(reverse('products:create_product'))
+        self.assertIs(view.func, views.create_product)
 
     def test_products_delete_product_view_function_is_correct(self):
         view = resolve(reverse('products:delete_product',

@@ -11,6 +11,10 @@ class ProductUrlsTest(TestCase):
         url = reverse('products:products')
         self.assertEqual(url, '/stock/products/')
 
+    def test_create_product_url_is_correct(self):
+        url = reverse('products:create_product')
+        self.assertEqual(url, '/stock/products/create/')
+
     def test_delete_product_url_is_correct(self):
         url = reverse('products:delete_product', kwargs={'product_id': 1})
         self.assertEqual(url, '/stock/products/delete/1')
