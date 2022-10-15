@@ -72,7 +72,7 @@ def edit_client(request, id_client):
 
 
 def delete_client(request, id_client):
-    cliente = Cliente.objects.filter(id=id_client)
+    cliente = Cliente.objects.get(id=id_client)
     if request.method == 'GET':
         return redirect(reverse('clients:clients'))
     if request.method == 'POST':

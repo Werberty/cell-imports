@@ -1,12 +1,12 @@
 import re
 
+from django import forms
 from django.core.exceptions import ValidationError
-from django.forms import ModelForm
 
 from .models import Cliente
 
 
-class ClientesForm(ModelForm):
+class ClientesForm(forms.ModelForm):
     class Meta:
         model = Cliente
         fields = [
@@ -15,6 +15,28 @@ class ClientesForm(ModelForm):
             'telefone',
             'email',
         ]
+
+        labels = {
+            'nome': 'Nome',
+            'sobrenome': 'Sobrenome',
+            'telefone': 'Telefone',
+            'email': 'E-mail',
+        }
+
+        widgets = {
+            'nome': forms.TextInput(attrs={
+                'placeholder': 'Ex.: João'
+            }),
+            'sobrenome': forms.TextInput(attrs={
+                'placeholder': 'Ex.: Alberto de Sousa'
+            }),
+            'telefone': forms.TextInput(attrs={
+                'placeholder': '(XX) XXXXX-XXXX'
+            }),
+            'email': forms.TextInput(attrs={
+                'placeholder': 'exemplo@email.com'
+            }),
+        }
 
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)

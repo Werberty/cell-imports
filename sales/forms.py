@@ -19,6 +19,13 @@ class VendasForm(ModelForm):
             'forma_pagamento',
             'observacoes',
         ]
+        labels = {
+            'cliente': 'Cliente',
+            'produto': 'Produto',
+            'valor_venda': 'Valor da venda',
+            'forma_pagamento': 'Forma de pagamento',
+            'observacoes': 'Observações',
+        }
 
     def clean_valor_venda(self):
         valor_venda = self.cleaned_data["valor_venda"]
