@@ -17,7 +17,7 @@
             Carrinho
         </div>
         <div class="card-body">
-            <form class="row gx-3 gy-2 align-items-center" action="{% url 'sales:sales' %}" method="POST">
+            <form class="row gx-3 gy-2 align-items-center" action="{% url 'sales:create_sales' %}" method="POST">
                 {% csrf_token %}
                 {% include 'global/partials/messages.html' %}
 

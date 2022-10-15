@@ -25,7 +25,7 @@ class ClientesForm(ModelForm):
         email = self.cleaned_data["email"]
 
         regex = re.compile(
-            r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')
+            r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')  # noqa: E501
         if not bool(re.fullmatch(regex, email)):
             raise ValidationError('Email inválido!')
 
