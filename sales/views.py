@@ -40,7 +40,7 @@ def create_sales(request):
         del(request.session['sales_form_data'])
         messages.success(request, 'Venda cadastrada')
 
-    return redirect(reverse('sales:create_sales'))
+    return redirect(reverse('sales:sales'))
 
 
 def view_nota_fiscal(request, id_sale):

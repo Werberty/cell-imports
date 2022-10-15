@@ -21,14 +21,20 @@
                 {% csrf_token %}
                 {% include 'global/partials/messages.html' %}
 
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     {{ form.cliente|as_crispy_field }}
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     {{ form.produto|as_crispy_field }}
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     {{ form.valor_venda|as_crispy_field }}
+                </div>
+                <div class="col-sm-3">
+                    {{ form.forma_pagamento|as_crispy_field }}
+                </div>
+                <div class="col-sm-12">
+                    {{ form.observacoes|as_crispy_field }}
                 </div>
                 
                 <div class="d-grid gap-2 col-4 mx-auto">

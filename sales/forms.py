@@ -5,12 +5,19 @@ from .models import Venda
 
 
 class VendasForm(ModelForm):
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
+        self.fields['observacoes'].widget.attrs.update(
+            {'style': 'height: 70px;'})
+
     class Meta:
         model = Venda
         fields = [
             'cliente',
             'produto',
             'valor_venda',
+            'forma_pagamento',
+            'observacoes',
         ]
 
     def clean_valor_venda(self):

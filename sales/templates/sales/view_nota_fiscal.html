@@ -65,7 +65,20 @@
     <hr class="border border-dark border-1 opacity-50">
     <div class="pt-2 pb-1">
         <p><strong>Condições de pagamento:</strong></p>
-        <p><strong>Forma de pagamento: </strong>Dinheiro</p>
+        <p>
+            <strong>Forma de pagamento: </strong>
+            {% if venda.forma_pagamento == 'OT' %}
+                Outros
+            {% elif venda.forma_pagamento == 'PX'%}
+                Pix
+            {% elif venda.forma_pagamento == 'CC'%}
+                Cartão de crédito
+            {% elif venda.forma_pagamento == 'CD'%}
+                Cartão de débito
+            {% elif venda.forma_pagamento == 'DN'%}
+                Dinheiro
+            {% endif %}
+            </p>
         <table class="table">
             <thead>
                 <th scope="col">Qtd</th>
@@ -83,9 +96,7 @@
     <div class="card">
         <div class="card-body">
             <h5>Observações</h5>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, magni delectus id quas in
-                corrupti odit repellendus eligendi debitis. Dolor quod impedit neque enim pariatur distinctio
-                excepturi saepe rem eligendi.</p>
+            <p>{{ venda.observacoes }}</p>
         </div>
     </div>
 </div>
