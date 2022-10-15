@@ -13,9 +13,9 @@ Um sistema administrativo para uma loja de smartphones.
 - listar produtos cadastrados
 - Cadastro de clientes
 - Cadastro de vendas
+- Gerar nota de fisca e mandar para os clientes
 
 ### funcionalidades a serem implementadas:
-- Gerar nota de fisca e mandar para os clientes
 - Fazer controle de garatia dos produtos
 
 
