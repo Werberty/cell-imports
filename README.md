@@ -17,12 +17,12 @@ Um sistema administrativo para uma loja de smartphones.
 - [ ] Fazer controle de garatia dos produtos
 
 
-## :camera: Layout web
+### :camera: Layout web
 ![Web 1](https://github.com/Werberty/cell-imports/blob/0ca4407db42259a2587c47f8da3b5e39c3ae29cb/assets/cell-imports-4.gif)
 ![Web 1](https://github.com/Werberty/cell-imports/blob/9fde2da1c14f551fc4f28d00c51d8b60de4ae7c0/assets/cell-imports-6.gif)
 
 
-## :computer: Tecnologias utilizadas
+### 🛠 Tecnologias utilizadas
 - Python
 - Django
 - HTML
