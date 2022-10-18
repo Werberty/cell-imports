@@ -6,10 +6,8 @@
 <p align="center">
  <a href="#objetivo">Objetivo</a> •
  <a href="#funcionalidades">Funionalidades</a> • 
+ <a href="#layout">Layout</a> • 
  <a href="#tecnologias">Tecnologias</a> • 
- <a href="#contribuicao">Contribuição</a> • 
- <a href="#licenc-a">Licença</a> • 
- <a href="#autor">Autor</a>
 </p>
 
 <h4 align="center"> 
@@ -22,7 +20,7 @@
 Um sistema capaz de gerenciar stock de produtos, cadastro de clientes vendas. Em que pode ter acesso à geração de nota fiscal e dados detalhados das vendas da loja.
 </p>
 
-<h2>⚙️ Funcionalidades</h2>
+<h2 id="funcionalidades">⚙️ Funcionalidades</h2>
 
 - [x] Cadastro de produtos
 - [x] Deletar produtos
@@ -35,14 +33,14 @@ Um sistema capaz de gerenciar stock de produtos, cadastro de clientes vendas. Em
 - [ ] Fazer controle de garatia dos produtos
 
 
-<h2>🖼️ Demonstração</h2>
+<h2 id="layout">🖼️ Layout</h2>
 
 <h1 align="center">
   <img alt="NextLevelWeek" title="#NextLevelWeek" src="./assets/cell-imports-6.gif" />
   <img alt="NextLevelWeek" title="#NextLevelWeek" src="./assets/cell-imports-4.gif" />
 </h1>
 
-<h2>🛠 Tecnologias</h2>
+<h2 id="tecnologias">🛠 Tecnologias</h2>
 
 <p>As seguintes ferramentas foram usadas na construção do projeto:</p>
 
