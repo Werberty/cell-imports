@@ -22,7 +22,7 @@ class VendasForm(ModelForm):
         labels = {
             'cliente': 'Cliente',
             'produto': 'Produto',
-            'valor_venda': 'Valor da venda',
+            'valor_venda': 'Valor da venda (R$)',
             'forma_pagamento': 'Forma de pagamento',
             'observacoes': 'Observações',
         }

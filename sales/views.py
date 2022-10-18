@@ -58,17 +58,14 @@ def down_nota_fiscal(request, id_sale):
     template_path = 'sales/down_nota_fiscal.html'
     context = {'venda': venda}
 
-    # Create a Django response object, and specify content_type as pdf
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = f'filename="nota-fiscal-{venda.produto}.pdf"'  # noqa: E501
-    # find the template and render it.
     template = get_template(template_path)
     html = template.render(context)
 
-    # create a pdf
     pisa_status = pisa.CreatePDF(
         html, dest=response)
-    # if error then show some funny view
+
     if pisa_status.err:
         return HttpResponse('We had some errors <pre>' + html + '</pre>')
     return response

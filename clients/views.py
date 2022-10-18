@@ -55,7 +55,6 @@ def edit_client(request, id_client):
             messages.add_message(
                 request, constants.SUCCESS, 'Cliente editado')
         else:
-            messages.add_message(request, constants.ERROR, 'Erro ao editar')
             form = ClientesForm(request.POST)
             cliente = get_object_or_404(Cliente, id=id_client)
             clientes = Cliente.objects.all().order_by('-id')

@@ -20,23 +20,23 @@
 
       <tbody>
         {% for produto in produtos %}
-        <tr>
-          <td>{{ produto.marca }}</td>
-          <td>{{ produto.modelo }}</td>
-          <td>{{ produto.cor }}</td>
-          <td>{{ produto.memoria }}Gb RAM</td>
-          <td>{{ produto.armazenamento }}Gb ROM</td>
-          <td>{{ produto.codigo_produto }}</td>
-          <td>
-            <abbr title="Ver detalhes" class="me-3"><a href="{% url 'products:detail_product' produto.id %}" class="link-success"><i class="fa-solid fa-eye"></i></a></abbr>
-            <abbr title="Editar" class="me-3"><a href="{% url 'products:edit_product' produto.id %}" class="link-primary"><i class="fa-solid fa-solid fa-pen"></i></a></abbr>
-            <abbr title="Deletar" class="me-3"><a href="#" class="link-danger" data-bs-toggle="modal" data-bs-target="#modalDelete"><i class="fa-solid fa-trash-can"></i></a></abbr>
-          </td>
-        
-        <!-- Modal Delete -->
-        {% include 'products/delete_product.html' %}
-        
-        </tr>
+          <tr>
+            <td>{{ produto.marca }}</td>
+            <td>{{ produto.modelo }} {{produto.id}}</td>
+            <td>{{ produto.cor }}</td>
+            <td>{{ produto.memoria }}Gb RAM</td>
+            <td>{{ produto.armazenamento }}Gb ROM</td>
+            <td>{{ produto.codigo_produto }}</td>
+            <td>
+              <abbr title="Ver detalhes" class="me-3"><a href="{% url 'products:detail_product' produto.id %}" class="link-success"><i class="fa-solid fa-eye"></i></a></abbr>
+              <abbr title="Editar" class="me-3"><a href="{% url 'products:edit_product' produto.id %}" class="link-primary"><i class="fa-solid fa-solid fa-pen"></i></a></abbr>
+              <abbr title="Deletar" class="me-3"><a href="#" class="link-danger" data-bs-toggle="modal" data-bs-target="#modalDelete"><i class="fa-solid fa-trash-can"></i></a></abbr>
+            </td>
+            
+            
+          </tr>
+          <!-- Modal Delete -->
+          {% include 'products/delete_product.html' %}
         {% endfor %}
     </tbody>
     </table>
