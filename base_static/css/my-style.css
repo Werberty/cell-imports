@@ -1,0 +1,10 @@
+.plaintext-button {
+    display: inline;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+
+.inline {
+    display: inline;
+}

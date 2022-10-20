@@ -70,14 +70,21 @@ def edit_client(request, id_client):
         return render(request, 'clients/clients.html', context)
 
 
-def delete_client(request, id_client):
+def delete_client(request):
+    if not request.POST:
+        raise Http404()
+
+    POST = request.POST
+    id_client = POST.get('id')
+
     cliente = Cliente.objects.get(id=id_client)
-    if request.method == 'GET':
-        return redirect(reverse('clients:clients'))
-    if request.method == 'POST':
-        cliente.delete()
-        messages.add_message(request, constants.WARNING, 'Cliente deletado')
-        return redirect(reverse('clients:clients'))
+
+    if not cliente:
+        raise Http404()
+
+    cliente.delete()
+    messages.add_message(request, constants.WARNING, 'Cliente deletado')
+    return redirect(reverse('clients:clients'))
 
 
 def detail_client(request, id_client):

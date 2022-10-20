@@ -53,16 +53,21 @@ def create_product(request):
 
 
 @login_required(login_url='/auth/login')
-def delete_product(request, product_id):
-    product = Produto.objects.filter(id=product_id)
+def delete_product(request):
+    if not request.POST:
+        raise Http404()
 
-    if request.method == 'GET':
-        return redirect(reverse('products:products'))
+    POST = request.POST
+    product_id = POST.get('id')
 
-    if request.method == 'POST':
-        product.delete()
-        messages.add_message(request, constants.WARNING, 'Produto deletado')
-        return redirect(reverse('products:products'))
+    product = Produto.objects.get(id=product_id)
+
+    if not product:
+        raise Http404()
+
+    product.delete()
+    messages.add_message(request, constants.WARNING, 'Produto deletado')
+    return redirect(reverse('products:products'))
 
 
 @login_required(login_url='/auth/login')
