@@ -75,7 +75,7 @@ def delete_product(request):
 
 @login_required(login_url='/auth/login')
 def edit_product(request, product_id):
-    produto = get_object_or_404(Produto, id=product_id)
+    produto = get_object_or_404(Produto, id=product_id, vendido=False)
     produtos = Produto.objects.filter(vendido=False).order_by('-id')
     form = ProdutoForm(instance=produto)
 

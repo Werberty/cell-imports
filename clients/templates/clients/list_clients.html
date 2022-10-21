@@ -28,13 +28,7 @@
                 <input type="hidden" name="id" value="{{cliente.id}}">
                 <abbr title="Deletar" class="me-3"><button type="submit" class="link-danger plaintext-button"><i class="fa-solid fa-trash-can"></i></button></abbr>
               </form>
-              {% comment %} <abbr title="Deletar" class="me-3"><a href="#" class="link-danger" data-bs-toggle="modal" data-bs-target="#modalDelete"><i class="fa-solid fa-trash-can"></i></a></abbr> {% endcomment %}
-
             </td>
-          
-          <!-- Modal Delete -->
-          {% comment %} {% include 'clients/delete_client.html' %} {% endcomment %}
-          
           </tr>
           {% endfor %}
       </tbody>

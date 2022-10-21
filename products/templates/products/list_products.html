@@ -35,13 +35,9 @@
                 <input type="hidden" name="id" value="{{ produto.id }}">
                 <abbr title="Deletar" class="me-3"><button type="submit" class="plaintext-button link-danger"><i class="fa-solid fa-trash-can"></i></button></abbr>
               </form>
-              {% comment %} <abbr title="Deletar" class="me-3"><a href="#" class="link-danger" data-bs-toggle="modal" data-bs-target="#modalDelete"><i class="fa-solid fa-trash-can"></i></a></abbr> {% endcomment %}
             </td>
-            
-            
           </tr>
-          <!-- Modal Delete -->
-          {% comment %} {% include 'products/delete_product.html' %} {% endcomment %}
+
         {% endfor %}
     </tbody>
     </table>
