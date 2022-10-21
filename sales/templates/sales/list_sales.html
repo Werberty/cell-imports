@@ -17,7 +17,11 @@
             <tbody>
                 {% for venda in vendas %}
                 <tr>
-                    <td class="col"><a class="link-dark" href="{% url 'clients:detail_client' venda.cliente.id %}">{{venda.cliente}}</a></td>
+                    {% if venda.cliente.id %}
+                        <td class="col"><a class="link-dark" href="{% url 'clients:detail_client' venda.cliente.id %}">{{venda.cliente}}</a></td>
+                    {% else %}
+                        <td class="col">-----------------</td>
+                    {% endif %}
                     <td class="col">{{ venda.produto }}</td>
                     <td class="col">{{venda.produto.codigo_produto}}</td>
                     <td class="col">{{venda.saled_at}}</td>

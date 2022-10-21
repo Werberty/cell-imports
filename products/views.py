@@ -60,7 +60,10 @@ def delete_product(request):
     POST = request.POST
     product_id = POST.get('id')
 
-    product = Produto.objects.get(id=product_id)
+    product = Produto.objects.get(
+        id=product_id,
+        vendido=False
+    )
 
     if not product:
         raise Http404()

@@ -14,11 +14,13 @@ class Venda(models.Model):
     )
 
     vendedor = models.ForeignKey(
-        User, on_delete=models.DO_NOTHING, related_name='vendas')
+        User, on_delete=models.CASCADE, related_name='vendas')
     cliente = models.ForeignKey(
-        Cliente, on_delete=models.DO_NOTHING, related_name='vendas')
+        Cliente, on_delete=models.SET_NULL, blank=True, null=True,
+        related_name='vendas'
+    )
     produto = models.OneToOneField(
-        Produto, on_delete=models.DO_NOTHING, related_name='vendas')
+        Produto, on_delete=models.CASCADE, related_name='vendas')
     valor_venda = models.FloatField(verbose_name='Valor da venda')
     forma_pagamento = models.CharField(
         max_length=2, choices=CHOICES_PAGAMENTO, blank=True, default='OT')
