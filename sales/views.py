@@ -1,11 +1,12 @@
 from django.contrib import messages
+from django.core.paginator import Paginator
 from django.http import Http404, HttpResponse
 from django.shortcuts import redirect, render
 from django.template.loader import get_template
 from django.urls import reverse
-from products.models import Produto
 from xhtml2pdf import pisa
 
+from products.models import Produto
 from sales.forms import VendasForm
 from sales.models import Venda
 
@@ -14,7 +15,12 @@ def sales(request):
     sales_form_data = request.session.get('sales_form_data') or None
     form = VendasForm(sales_form_data)
     vendas = Venda.objects.all().order_by('-id')
-    context = {'form': form, 'vendas': vendas}
+
+    page_number = request.GET.get('page', 1)
+    paginator = Paginator(vendas, 5)
+    page_obj = paginator.get_page(page_number)
+
+    context = {'form': form, 'vendas': page_obj}
 
     return render(request,  'sales/sales.html', context)
 

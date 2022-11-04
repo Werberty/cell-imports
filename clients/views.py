@@ -1,9 +1,11 @@
 
 from django.contrib import messages
 from django.contrib.messages import constants
+from django.core.paginator import Paginator
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
+
 from sales.models import Venda
 
 from .forms import ClientesForm
@@ -14,9 +16,14 @@ def clients(request):
     client_form_data = request.session.get('client_form_data') or None
     clientes = Cliente.objects.all().order_by('-id')
     form = ClientesForm(client_form_data)
+
+    page_number = request.GET.get('page', 1)
+    paginator = Paginator(clientes, 5)
+    page_obj = paginator.get_page(page_number)
+
     return render(request, 'clients/clients.html', context={
         'form': form,
-        'clientes': clientes,
+        'clientes': page_obj,
     })
 
 

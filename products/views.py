@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.messages import constants
+from django.core.paginator import Paginator
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
@@ -19,8 +20,13 @@ def products(request):
     product_form_data = request.session.get('product_form_data') or None
     produtos = Produto.objects.filter(vendido=False).order_by('-id')
     form = ProdutoForm(product_form_data)
+
+    page_number = request.GET.get('page', 1)
+    paginator = Paginator(produtos, 5)
+    page_obj = paginator.get_page(page_number)
+
     return render(request, 'products/products.html', context={
-        'produtos': produtos,
+        'produtos': page_obj,
         'form': form,
     })
 
