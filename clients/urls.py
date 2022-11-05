@@ -6,6 +6,7 @@ app_name = 'clients'
 
 urlpatterns = [
     path('clients/', views.clients, name='clients'),
+    path('clients/search/', views.clients_search, name='search'),
     path('clients/create/', views.create_client, name='create_client'),
     path('clients/delete/',
          views.delete_client, name='delete_client'),

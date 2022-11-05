@@ -2,6 +2,8 @@
 from django.contrib import messages
 from django.contrib.messages import constants
 from django.core.paginator import Paginator
+from django.db.models import Q, Value
+from django.db.models.functions import Concat
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
@@ -101,4 +103,31 @@ def detail_client(request, id_client):
     return render(request, 'clients/detail_client.html', context={
         'cliente': cliente,
         'compras': compras,
+    })
+
+
+def clients_search(request):
+    search_term = request.GET.get('q', '')
+
+    campo = Concat('nome', Value(' '), 'sobrenome')
+
+    clientes = Cliente.objects.annotate(
+        nome_completo=campo
+    ).filter(
+        Q(
+            Q(nome_completo__icontains=search_term) |
+            Q(telefone__icontains=search_term) |
+            Q(email__icontains=search_term)
+        )
+    ).order_by('-id')
+    form = ClientesForm()
+
+    page_number = request.GET.get('page', 1)
+    paginator = Paginator(clientes, 5)
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'clients/clients.html', context={
+        'form': form,
+        'clientes': page_obj,
+        'search_term': search_term
     })
