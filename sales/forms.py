@@ -1,14 +1,29 @@
+from django import forms
 from django.core.exceptions import ValidationError
-from django.forms import ModelForm
+
+from products.models import Produto
 
 from .models import Venda
 
+produtos = Produto.objects.filter(vendido=False)
 
-class VendasForm(ModelForm):
+
+def queryset_to_tuple_list(queryset):
+    result = []
+    for query in queryset.values():
+        result.append(
+            ((query['id']), (f"{query['marca']} {query['modelo']}"))
+        )
+    return result
+
+
+class VendasForm(forms.ModelForm):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self.fields['observacoes'].widget.attrs.update(
             {'style': 'height: 70px;'})
+
+    produto = forms.ChoiceField(choices=queryset_to_tuple_list(produtos))
 
     class Meta:
         model = Venda
@@ -26,10 +41,3 @@ class VendasForm(ModelForm):
             'forma_pagamento': 'Forma de pagamento',
             'observacoes': 'Observações',
         }
-
-    def clean_valor_venda(self):
-        valor_venda = self.cleaned_data["valor_venda"]
-        if valor_venda < 1000:
-            raise ValidationError('Muito barato!')
-        else:
-            return valor_venda
