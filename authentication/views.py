@@ -1,7 +1,12 @@
 from django.contrib import auth, messages
 from django.contrib.auth.models import User
 from django.core.validators import validate_email
+from django.db.models.aggregates import Count, Sum
 from django.shortcuts import redirect, render
+
+from clients.models import Cliente
+from products.models import Produto
+from sales.models import Venda
 
 from .utils import password_is_valid
 
@@ -82,3 +87,21 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('/auth/login')
+
+
+def dashboard(request):
+    vendas = Venda.objects.filter(vendedor=request.user)
+    num_vendas = vendas.aggregate(Count('id'))
+    num_clientes = Cliente.objects.all().aggregate(Count('id'))
+    num_produtos = Produto.objects.filter(vendido=False).aggregate(Count('id'))
+    valor_vendas = vendas.aggregate(Sum('valor_venda'))
+
+    context = {
+        'vendas': vendas,
+        'num_vendas': num_vendas['id__count'],
+        'num_produtos': num_produtos['id__count'],
+        'num_clientes': num_clientes['id__count'],
+        'valor_vendas': round(valor_vendas['valor_venda__sum'], 2),
+    }
+
+    return render(request, 'authentication/dashboard.html', context=context)

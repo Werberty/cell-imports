@@ -1,0 +1,42 @@
+{% extends 'global/base_nav.html' %}
+
+{% block content %}
+    <h1 class="mt-4">Dashboard</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">Veja as principais estatísticas da loja</li>
+    </ol>
+    <div class="row">
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-primary text-white mb-4">
+                <div class="card-body m-auto"><p class="fs-1 mb-0">{{ num_vendas }}</p></div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link m-auto text-decoration-none" href="#">Vendas</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-success text-white mb-4">
+                <div class="card-body m-auto"><p class="fs-2 m-2">R$ {{ valor_vendas }}</p></div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link m-auto text-decoration-none" href="#">Valor em vendas</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-warning text-white mb-4">
+                <div class="card-body m-auto"><p class="fs-1 mb-0">{{ num_produtos }}</p></div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link m-auto text-decoration-none" href="#">Produtos em stock</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-danger text-white mb-4">
+                <div class="card-body m-auto"><p class="fs-1 mb-0">{{ num_clientes }}</p></div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link m-auto text-decoration-none" href="#">Clientes cadastrados</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

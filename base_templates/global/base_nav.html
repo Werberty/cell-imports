@@ -34,6 +34,11 @@
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
+                        <div class="sb-sidenav-menu-heading">Vendedor</div>
+                        <a class="nav-link" href="{% url 'auth:dashboard' %}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-gauge-high"></i></div>
+                            Dashboard
+                        </a>
                         <div class="sb-sidenav-menu-heading">Loja</div>
                         <a class="nav-link" href="{% url 'products:products' %}">
                             <div class="sb-nav-link-icon"><i class="fas fa-box"></i></div>
